@@ -218,7 +218,93 @@ async def terms(request: Request):
 
 @app.get("/health")
 async def health():
-    return {"status": "ok", "tools": len(TOOLS), "version": "1.3.0"}
+    return {"status": "ok", "tools": len(TOOLS), "version": "1.5.0"}
+
+# ─── Square Checkout ─────────────────────────────────────────────────────────
+import os
+SQUARE_APP_ID = os.environ.get("SQUARE_APP_ID", "sq0idp-M7pR0h8Xs-wNGRcMxIfI3Q")
+SQUARE_LOCATION_ID = os.environ.get("SQUARE_LOCATION_ID", "LP7AKQWB67YGV")
+SQUARE_TOKEN = os.environ.get("SQUARE_ACCESS_TOKEN", "")
+
+@app.get("/checkout", response_class=HTMLResponse)
+async def checkout_page(request: Request):
+    return templates.TemplateResponse(request, "checkout.html", {
+        "tools": TOOLS,
+        "square_app_id": SQUARE_APP_ID,
+        "square_location_id": SQUARE_LOCATION_ID,
+    })
+
+@app.post("/api/subscribe")
+async def api_subscribe(request: Request):
+    body = await request.json()
+    source_id = body.get("source_id")
+    email = body.get("email", "").strip()
+    plan = body.get("plan", "developer")
+
+    if not source_id or not email:
+        return {"success": False, "error": "Missing card token or email"}
+
+    if not SQUARE_TOKEN:
+        return {"success": False, "error": "Payment processing not configured"}
+
+    import urllib.request as urlreq
+
+    # Step 1: Create customer
+    customer_data = json.dumps({"email_address": email, "idempotency_key": f"dp-cust-{email}"}).encode()
+    req = urlreq.Request("https://connect.squareup.com/v2/customers",
+        data=customer_data,
+        headers={"Authorization": f"Bearer {SQUARE_TOKEN}", "Content-Type": "application/json", "Square-Version": "2024-01-18"})
+    try:
+        resp = json.loads(urlreq.urlopen(req).read())
+        customer_id = resp["customer"]["id"]
+    except Exception as e:
+        return {"success": False, "error": f"Customer creation failed: {e}"}
+
+    # Step 2: Store card on file
+    card_data = json.dumps({"source_id": source_id, "idempotency_key": f"dp-card-{email}-{int(time.time())}", "card": {"customer_id": customer_id}}).encode()
+    req2 = urlreq.Request("https://connect.squareup.com/v2/cards",
+        data=card_data,
+        headers={"Authorization": f"Bearer {SQUARE_TOKEN}", "Content-Type": "application/json", "Square-Version": "2024-01-18"})
+    try:
+        resp2 = json.loads(urlreq.urlopen(req2).read())
+        card_id = resp2["card"]["id"]
+    except Exception as e:
+        return {"success": False, "error": f"Card storage failed: {e}"}
+
+    # Step 3: Create subscription
+    plan_ids = {"developer": "JVLFBV3HTD7H2ABKSQVLS56V", "business": "DUJ4TPZXRLPCWHMSL5QCSCFW"}
+    sub_data = json.dumps({
+        "idempotency_key": f"dp-sub-{email}-{int(time.time())}",
+        "location_id": SQUARE_LOCATION_ID,
+        "plan_variation_id": plan_ids.get(plan, plan_ids["developer"]),
+        "customer_id": customer_id,
+        "card_id": card_id,
+    }).encode()
+    req3 = urlreq.Request("https://connect.squareup.com/v2/subscriptions",
+        data=sub_data,
+        headers={"Authorization": f"Bearer {SQUARE_TOKEN}", "Content-Type": "application/json", "Square-Version": "2024-01-18"})
+    try:
+        resp3 = json.loads(urlreq.urlopen(req3).read())
+        if "subscription" not in resp3:
+            return {"success": False, "error": str(resp3.get("errors", "Unknown error"))}
+    except Exception as e:
+        return {"success": False, "error": f"Subscription failed: {e}"}
+
+    # Step 4: Create upgraded API key
+    tier = "developer" if plan == "developer" else "business"
+    conn = sqlite3.connect(DB_PATH)
+    existing = conn.execute("SELECT key FROM api_keys WHERE email = ?", (email,)).fetchone()
+    if existing:
+        conn.execute("UPDATE api_keys SET tier = ? WHERE email = ?", (tier, email))
+        api_key = existing[0]
+    else:
+        import secrets as _s
+        api_key = "dp_" + _s.token_hex(24)
+        conn.execute("INSERT INTO api_keys (key, email, tier) VALUES (?, ?, ?)", (api_key, email, tier))
+    conn.commit()
+    conn.close()
+
+    return {"success": True, "api_key": api_key, "tier": tier}
 
 @app.get("/google8fb40758dad9eb73.html")
 async def google_verify():
