@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Privacy Policy - DevPulse{% endblock %}
+{% block content %}
+<div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <h1 class="text-3xl font-bold mb-6">Privacy Policy</h1>
+    <p class="text-sm text-gray-500 mb-8">Last updated: April 2, 2026</p>
+    <div class="prose prose-lg text-gray-600 space-y-6">
+        <h2 class="text-xl font-semibold text-gray-900">Summary</h2>
+        <p>DevPulse is a privacy-first platform. <strong>We do not collect, store, or sell your personal data.</strong> The data you enter into our tools is processed in-memory and never saved to disk or any database.</p>
+
+        <h2 class="text-xl font-semibold text-gray-900">What We Don't Collect</h2>
+        <ul class="list-disc pl-6 space-y-1">
+            <li>We do not store any input data you submit to our tools</li>
+            <li>We do not use tracking cookies</li>
+            <li>We do not require user accounts or registration</li>
+            <li>We do not sell or share data with third parties</li>
+            <li>We do not fingerprint your browser</li>
+        </ul>
+
+        <h2 class="text-xl font-semibold text-gray-900">Third-Party Services</h2>
+        <p>DevPulse may use the following third-party services:</p>
+        <ul class="list-disc pl-6 space-y-1">
+            <li><strong>Google AdSense</strong> — Displays advertisements. Google may use cookies to serve ads based on your browsing history. You can opt out at <a href="https://adssettings.google.com" class="text-brand-600">adssettings.google.com</a>.</li>
+            <li><strong>Google Analytics</strong> — Collects anonymized usage statistics (page views, referrers). No personally identifiable information is collected.</li>
+            <li><strong>Cloudflare</strong> — CDN and DDoS protection. Cloudflare may log IP addresses for security purposes per their own privacy policy.</li>
+        </ul>
+
+        <h2 class="text-xl font-semibold text-gray-900">Data Processing</h2>
+        <p>All tool operations are stateless. When you use a tool (e.g., format JSON, generate a hash), the data is:</p>
+        <ol class="list-decimal pl-6 space-y-1">
+            <li>Sent to our server via HTTPS</li>
+            <li>Processed in-memory</li>
+            <li>Returned to your browser</li>
+            <li>Immediately discarded — nothing is logged or stored</li>
+        </ol>
+
+        <h2 class="text-xl font-semibold text-gray-900">API Usage</h2>
+        <p>When using the DevPulse API, we may log:</p>
+        <ul class="list-disc pl-6 space-y-1">
+            <li>IP addresses (for rate limiting only, not stored permanently)</li>
+            <li>Request counts (aggregate, not individual request content)</li>
+        </ul>
+        <p>We never log the content of API requests or responses.</p>
+
+        <h2 class="text-xl font-semibold text-gray-900">Your Rights</h2>
+        <p>Since we don't collect personal data, there is nothing to request deletion of. If you have concerns, contact us at <a href="mailto:hello@devpulse.tools" class="text-brand-600">hello@devpulse.tools</a>.</p>
+
+        <h2 class="text-xl font-semibold text-gray-900">Changes</h2>
+        <p>We may update this policy. Changes will be reflected on this page with an updated date.</p>
+    </div>
+</div>
+{% endblock %}

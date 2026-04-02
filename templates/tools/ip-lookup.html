@@ -1,0 +1,17 @@
+{% extends "tool_base.html" %}
+{% block tool_content %}
+<div class="space-y-4">
+    <div class="text-center py-8">
+        <div class="text-sm text-gray-500 mb-2">Your Public IP Address</div>
+        <div id="ipDisplay" class="text-4xl font-bold text-brand-600 mono mb-4">Loading...</div>
+        <button onclick="copyToClipboard(document.getElementById('ipDisplay').textContent, this)" class="px-6 py-2 bg-brand-600 text-white rounded-lg hover:bg-brand-700 font-medium">Copy IP</button>
+    </div>
+    <div class="bg-gray-50 p-4 rounded-lg">
+        <h3 class="font-semibold mb-3">What is my IP?</h3>
+        <p class="text-sm text-gray-600">Your IP address is a unique identifier assigned to your device by your internet service provider (ISP). It's used to route internet traffic to and from your device. The IP shown above is your <strong>public</strong> IP as seen by external servers.</p>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}<script>
+fetch('/api/ip-lookup').then(r=>r.json()).then(d=>{if(d.success)document.getElementById('ipDisplay').textContent=d.ip;});
+</script>{% endblock %}

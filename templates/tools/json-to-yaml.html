@@ -1,0 +1,19 @@
+{% extends "tool_base.html" %}
+{% block tool_content %}
+<div class="space-y-4">
+    <div class="flex gap-2 mb-2">
+        <button onclick="setMode('json_to_yaml')" id="j2yBtn" class="px-4 py-2 bg-brand-600 text-white rounded-lg font-medium">JSON → YAML</button>
+        <button onclick="setMode('yaml_to_json')" id="y2jBtn" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium">YAML → JSON</button>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div><label class="block text-sm font-medium text-gray-700 mb-1" id="inLabel">JSON Input</label><textarea id="input" rows="12" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 text-sm" placeholder='{"name": "DevPulse", "tools": 25}'></textarea></div>
+        <div><div class="flex justify-between items-center mb-1"><label class="text-sm font-medium text-gray-700" id="outLabel">YAML Output</label><button onclick="copyToClipboard(document.getElementById('output').value, this)" class="text-xs px-3 py-1 bg-gray-200 rounded hover:bg-gray-300">Copy</button></div><textarea id="output" rows="12" readonly class="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg text-sm"></textarea></div>
+    </div>
+    <button onclick="convert()" class="px-6 py-2 bg-brand-600 text-white rounded-lg hover:bg-brand-700 font-medium">Convert</button>
+</div>
+{% endblock %}
+{% block scripts %}<script>
+let mode='json_to_yaml';
+function setMode(m){mode=m;document.getElementById('j2yBtn').className=m==='json_to_yaml'?'px-4 py-2 bg-brand-600 text-white rounded-lg font-medium':'px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium';document.getElementById('y2jBtn').className=m==='yaml_to_json'?'px-4 py-2 bg-brand-600 text-white rounded-lg font-medium':'px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium';document.getElementById('inLabel').textContent=m==='json_to_yaml'?'JSON Input':'YAML Input';document.getElementById('outLabel').textContent=m==='json_to_yaml'?'YAML Output':'JSON Output';}
+async function convert(){const r=await apiCall('/api/json-to-yaml',{text:document.getElementById('input').value,mode});document.getElementById('output').value=r.success?r.result:'Error: '+r.error;}
+</script>{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Terms of Use - DevPulse{% endblock %}
+{% block content %}
+<div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <h1 class="text-3xl font-bold mb-6">Terms of Use</h1>
+    <p class="text-sm text-gray-500 mb-8">Last updated: April 2, 2026</p>
+    <div class="prose prose-lg text-gray-600 space-y-6">
+        <h2 class="text-xl font-semibold text-gray-900">Acceptance</h2>
+        <p>By using DevPulse, you agree to these terms. If you disagree, please do not use the service.</p>
+
+        <h2 class="text-xl font-semibold text-gray-900">Service Description</h2>
+        <p>DevPulse provides free online developer utilities and a REST API. Tools are provided "as-is" without warranty of any kind.</p>
+
+        <h2 class="text-xl font-semibold text-gray-900">Acceptable Use</h2>
+        <p>You agree not to:</p>
+        <ul class="list-disc pl-6 space-y-1">
+            <li>Abuse, overload, or attempt to disrupt the service</li>
+            <li>Use automated scripts to scrape or overwhelm the API beyond rate limits</li>
+            <li>Reverse-engineer or attempt to access server infrastructure</li>
+            <li>Use the service for any illegal purpose</li>
+        </ul>
+
+        <h2 class="text-xl font-semibold text-gray-900">API Usage</h2>
+        <p>Free API access is subject to rate limits (120 requests per minute). Exceeding limits may result in temporary IP blocking. For higher limits, contact us about paid API tiers.</p>
+
+        <h2 class="text-xl font-semibold text-gray-900">Disclaimer</h2>
+        <p>DevPulse tools are provided for convenience. While we strive for accuracy, we make no guarantees about the correctness of outputs. Do not rely on DevPulse for security-critical operations (e.g., do not use our hash generator as your sole security measure).</p>
+
+        <h2 class="text-xl font-semibold text-gray-900">Limitation of Liability</h2>
+        <p>DevPulse shall not be liable for any damages arising from the use or inability to use the service, including but not limited to data loss, business interruption, or errors in tool output.</p>
+
+        <h2 class="text-xl font-semibold text-gray-900">Changes</h2>
+        <p>We may modify these terms at any time. Continued use after changes constitutes acceptance.</p>
+
+        <h2 class="text-xl font-semibold text-gray-900">Contact</h2>
+        <p>Questions? Email <a href="mailto:hello@devpulse.tools" class="text-brand-600">hello@devpulse.tools</a>.</p>
+    </div>
+</div>
+{% endblock %}

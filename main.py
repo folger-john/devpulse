@@ -55,8 +55,91 @@ async def security_middleware(request: Request, call_next):
                 status_code=413
             )
 
+    # API key authentication — paid tiers get higher limits
+    api_key = request.headers.get("x-api-key") or request.query_params.get("api_key")
+    if api_key and request.url.path.startswith("/api/"):
+        key_data = _get_api_key(api_key)
+        if key_data:
+            tier_limits = {"free": 120, "developer": 5000, "business": 50000, "enterprise": 999999}
+            tier_limit = tier_limits.get(key_data["tier"], 120)
+            # Re-check with tier limit
+            if len(_rate_store[ip]) < tier_limit:
+                _rate_store[ip] = []  # Reset — they're within tier limit
+
     response = await call_next(request)
     return response
+
+# ─── API Key System ──────────────────────────────────────────────────────────
+import sqlite3
+
+DB_PATH = "/home/ubuntu/devpulse/data/devpulse.db"
+
+def _init_db():
+    import os
+    os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
+    conn = sqlite3.connect(DB_PATH)
+    conn.execute("""CREATE TABLE IF NOT EXISTS api_keys (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        key TEXT UNIQUE NOT NULL,
+        email TEXT NOT NULL,
+        tier TEXT DEFAULT 'free',
+        requests_today INTEGER DEFAULT 0,
+        created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+        last_used TEXT
+    )""")
+    conn.execute("""CREATE TABLE IF NOT EXISTS api_usage (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        key_id INTEGER,
+        endpoint TEXT,
+        ip TEXT,
+        created_at TEXT DEFAULT CURRENT_TIMESTAMP
+    )""")
+    conn.commit()
+    conn.close()
+
+_init_db()
+
+def _get_api_key(key: str):
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+    row = conn.execute("SELECT * FROM api_keys WHERE key = ?", (key,)).fetchone()
+    conn.close()
+    return dict(row) if row else None
+
+@app.post("/api/keys/create")
+async def create_api_key(request: Request):
+    body = await request.json()
+    email = body.get("email", "").strip()
+    if not email or "@" not in email:
+        return {"success": False, "error": "Valid email required"}
+    conn = sqlite3.connect(DB_PATH)
+    existing = conn.execute("SELECT key FROM api_keys WHERE email = ?", (email,)).fetchone()
+    if existing:
+        conn.close()
+        return {"success": True, "key": existing[0], "message": "Key already exists for this email"}
+    import secrets as _sec
+    key = "dp_" + _sec.token_hex(24)
+    conn.execute("INSERT INTO api_keys (key, email, tier) VALUES (?, ?, 'free')", (key, email))
+    conn.commit()
+    conn.close()
+    return {"success": True, "key": key, "tier": "free", "rate_limit": "120 req/min"}
+
+@app.get("/api/keys/usage")
+async def api_key_usage(request: Request):
+    api_key = request.headers.get("x-api-key") or request.query_params.get("api_key")
+    if not api_key:
+        return {"success": False, "error": "API key required (x-api-key header or api_key param)"}
+    data = _get_api_key(api_key)
+    if not data:
+        return {"success": False, "error": "Invalid API key"}
+    tier_limits = {"free": 120, "developer": 5000, "business": 50000, "enterprise": 999999}
+    return {
+        "success": True,
+        "tier": data["tier"],
+        "rate_limit": f"{tier_limits.get(data['tier'], 120)} req/min",
+        "created": data["created_at"],
+    }
+
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
@@ -82,6 +165,11 @@ TOOLS = [
     {"slug": "http-status", "name": "HTTP Status Code Reference", "icon": "200", "desc": "Complete reference for all HTTP status codes.", "category": "Reference"},
     {"slug": "cron-parser", "name": "Cron Expression Parser", "icon": "⏰", "desc": "Parse and explain cron schedule expressions.", "category": "Data"},
     {"slug": "sql-formatter", "name": "SQL Formatter", "icon": "SQL", "desc": "Format and beautify SQL queries.", "category": "Data"},
+    {"slug": "json-to-yaml", "name": "JSON to YAML Converter", "icon": "Y", "desc": "Convert JSON to YAML and back.", "category": "Data"},
+    {"slug": "slug-generator", "name": "URL Slug Generator", "icon": "/", "desc": "Convert text to URL-friendly slugs.", "category": "Text"},
+    {"slug": "chmod-calculator", "name": "Chmod Calculator", "icon": "777", "desc": "Calculate Linux file permissions.", "category": "Reference"},
+    {"slug": "ip-lookup", "name": "IP Address Lookup", "icon": "IP", "desc": "Look up your public IP address and details.", "category": "Reference"},
+    {"slug": "text-case", "name": "Text Case Converter", "icon": "Aa", "desc": "Convert text to UPPER, lower, Title, camelCase, and more.", "category": "Text"},
 ]
 
 CATEGORIES = sorted(set(t["category"] for t in TOOLS))
@@ -99,7 +187,7 @@ async def home(request: Request):
 async def tool_page(request: Request, slug: str):
     tool = next((t for t in TOOLS if t["slug"] == slug), None)
     if not tool:
-        return HTMLResponse("Tool not found", status_code=404)
+        return templates.TemplateResponse(request, "404.html", status_code=404)
     return templates.TemplateResponse(request, f"tools/{slug}.html", {
         "tool": tool,
         "tools": TOOLS,
@@ -112,6 +200,18 @@ async def about(request: Request):
 @app.get("/api", response_class=HTMLResponse)
 async def api_docs(request: Request):
     return templates.TemplateResponse(request, "api_docs.html", {"tools": TOOLS})
+
+@app.get("/privacy", response_class=HTMLResponse)
+async def privacy(request: Request):
+    return templates.TemplateResponse(request, "privacy.html")
+
+@app.get("/terms", response_class=HTMLResponse)
+async def terms(request: Request):
+    return templates.TemplateResponse(request, "terms.html")
+
+@app.get("/health")
+async def health():
+    return {"status": "ok", "tools": len(TOOLS), "version": "1.1.0"}
 
 # ─── API Endpoints ───────────────────────────────────────────────────────────
 
@@ -421,6 +521,97 @@ async def api_sql_format(request: Request):
         formatted = formatted.replace(f" {kw}\n", f"\n{kw}\n")
 
     return {"success": True, "result": formatted}
+
+@app.post("/api/json-to-yaml")
+async def api_json_to_yaml(request: Request):
+    body = await request.json()
+    text = body.get("text", "")
+    mode = body.get("mode", "json_to_yaml")
+    try:
+        if mode == "json_to_yaml":
+            data = json.loads(text)
+            def to_yaml(obj, indent=0):
+                lines = []
+                pad = "  " * indent
+                if isinstance(obj, dict):
+                    for k, v in obj.items():
+                        if isinstance(v, (dict, list)):
+                            lines.append(f"{pad}{k}:")
+                            lines.append(to_yaml(v, indent + 1))
+                        else:
+                            val = "true" if v is True else "false" if v is False else "null" if v is None else f'"{v}"' if isinstance(v, str) else str(v)
+                            lines.append(f"{pad}{k}: {val}")
+                elif isinstance(obj, list):
+                    for item in obj:
+                        if isinstance(item, (dict, list)):
+                            lines.append(f"{pad}-")
+                            lines.append(to_yaml(item, indent + 1))
+                        else:
+                            val = "true" if item is True else "false" if item is False else "null" if item is None else f'"{item}"' if isinstance(item, str) else str(item)
+                            lines.append(f"{pad}- {val}")
+                return "\n".join(lines)
+            result = to_yaml(data)
+        else:
+            # Simple YAML to JSON (basic key: value parsing)
+            lines = text.strip().split("\n")
+            data = {}
+            for line in lines:
+                if ":" in line:
+                    key, val = line.split(":", 1)
+                    val = val.strip().strip('"').strip("'")
+                    if val.lower() == "true": val = True
+                    elif val.lower() == "false": val = False
+                    elif val.lower() == "null": val = None
+                    else:
+                        try: val = int(val)
+                        except ValueError:
+                            try: val = float(val)
+                            except ValueError: pass
+                    data[key.strip()] = val
+            result = json.dumps(data, indent=2)
+        return {"success": True, "result": result}
+    except Exception as e:
+        return {"success": False, "error": str(e)}
+
+@app.post("/api/slug-generate")
+async def api_slug_generate(request: Request):
+    body = await request.json()
+    text = body.get("text", "")
+    separator = body.get("separator", "-")
+    slug = text.lower().strip()
+    slug = re.sub(r'[àáâãäå]', 'a', slug)
+    slug = re.sub(r'[èéêë]', 'e', slug)
+    slug = re.sub(r'[ìíîï]', 'i', slug)
+    slug = re.sub(r'[òóôõö]', 'o', slug)
+    slug = re.sub(r'[ùúûü]', 'u', slug)
+    slug = re.sub(r'[ñ]', 'n', slug)
+    slug = re.sub(r'[^a-z0-9\s-]', '', slug)
+    slug = re.sub(r'[\s-]+', separator, slug)
+    slug = slug.strip(separator)
+    return {"success": True, "result": slug}
+
+@app.post("/api/text-case")
+async def api_text_case(request: Request):
+    body = await request.json()
+    text = body.get("text", "")
+    results = {
+        "UPPER CASE": text.upper(),
+        "lower case": text.lower(),
+        "Title Case": text.title(),
+        "Sentence case": text[0].upper() + text[1:].lower() if text else "",
+        "camelCase": "".join(w.capitalize() if i > 0 else w.lower() for i, w in enumerate(text.split())),
+        "PascalCase": "".join(w.capitalize() for w in text.split()),
+        "snake_case": re.sub(r'[\s-]+', '_', text.lower().strip()),
+        "kebab-case": re.sub(r'[\s_]+', '-', text.lower().strip()),
+        "CONSTANT_CASE": re.sub(r'[\s-]+', '_', text.upper().strip()),
+        "dot.case": re.sub(r'[\s-]+', '.', text.lower().strip()),
+    }
+    return {"success": True, "result": results}
+
+@app.get("/api/ip-lookup")
+async def api_ip_lookup(request: Request):
+    ip = request.headers.get("x-real-ip", request.headers.get("x-forwarded-for", request.client.host))
+    return {"success": True, "ip": ip}
 
 # ─── Sitemap for SEO ─────────────────────────────────────────────────────────
 

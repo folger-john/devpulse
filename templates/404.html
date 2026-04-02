@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}404 Not Found - DevPulse{% endblock %}
+{% block content %}
+<div class="max-w-2xl mx-auto px-4 py-24 text-center">
+    <div class="text-8xl font-bold text-brand-200 mb-4">404</div>
+    <h1 class="text-2xl font-bold text-gray-900 mb-4">Page not found</h1>
+    <p class="text-gray-500 mb-8">The page you're looking for doesn't exist or has been moved.</p>
+    <div class="flex justify-center gap-4">
+        <a href="/" class="px-6 py-3 bg-brand-600 text-white rounded-lg font-medium hover:bg-brand-700">Browse All Tools</a>
+        <a href="/api" class="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-300">API Docs</a>
+    </div>
+    <div class="mt-12">
+        <h2 class="text-sm font-semibold text-gray-500 mb-4">Popular Tools</h2>
+        <div class="flex flex-wrap justify-center gap-2">
+            <a href="/tool/json-formatter" class="px-3 py-1 bg-brand-50 text-brand-700 rounded-full text-sm hover:bg-brand-100">JSON Formatter</a>
+            <a href="/tool/base64" class="px-3 py-1 bg-brand-50 text-brand-700 rounded-full text-sm hover:bg-brand-100">Base64</a>
+            <a href="/tool/uuid-generator" class="px-3 py-1 bg-brand-50 text-brand-700 rounded-full text-sm hover:bg-brand-100">UUID Generator</a>
+            <a href="/tool/hash-generator" class="px-3 py-1 bg-brand-50 text-brand-700 rounded-full text-sm hover:bg-brand-100">Hash Generator</a>
+            <a href="/tool/password-generator" class="px-3 py-1 bg-brand-50 text-brand-700 rounded-full text-sm hover:bg-brand-100">Password Generator</a>
+            <a href="/tool/regex-tester" class="px-3 py-1 bg-brand-50 text-brand-700 rounded-full text-sm hover:bg-brand-100">Regex Tester</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
