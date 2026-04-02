@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 
-{% block title %}{{ tool.name }} - DevPulse Free Online Tool{% endblock %}
+{% block title %}{{ tool.name }} Online - Free Tool | DevPulse{% endblock %}
 {% block description %}{{ tool.desc }} Free online tool by DevPulse. No signup required.{% endblock %}
+{% block jsonld %}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"{{ tool.name }} - DevPulse","url":"https://devpulse.tools/tool/{{ tool.slug }}","applicationCategory":"DeveloperApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"{{ tool.desc }}"}
+</script>
+{% endblock %}
 {% block og_title %}{{ tool.name }} - DevPulse{% endblock %}
 {% block og_description %}{{ tool.desc }}{% endblock %}
 
