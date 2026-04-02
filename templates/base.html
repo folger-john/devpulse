@@ -168,6 +168,38 @@
                 setTimeout(() => { btn.textContent = orig; btn.classList.remove('bg-green-600'); }, 1500);
             });
         }
+
+        // Shareable URLs — load input from hash, update hash on input
+        function loadFromHash() {
+            const hash = window.location.hash;
+            if (hash && hash.includes('input=')) {
+                const val = decodeURIComponent(hash.split('input=')[1]);
+                const input = document.getElementById('input');
+                if (input) {
+                    input.value = val;
+                    // Trigger processing
+                    input.dispatchEvent(new Event('input'));
+                    // Click the first action button if it exists
+                    setTimeout(() => {
+                        const btn = document.querySelector('button[onclick*="format"], button[onclick*="convert"], button[onclick*="generate"], button[onclick*="decode"], button[onclick*="process"], button[onclick*="compare"], button[onclick*="minify"], button[onclick*="parse"]');
+                        if (btn) btn.click();
+                    }, 100);
+                }
+            }
+        }
+        document.addEventListener('DOMContentLoaded', loadFromHash);
+
+        // Share button — adds input to URL hash
+        function shareURL() {
+            const input = document.getElementById('input');
+            if (input && input.value) {
+                const url = window.location.origin + window.location.pathname + '#input=' + encodeURIComponent(input.value.substring(0, 2000));
+                navigator.clipboard.writeText(url).then(() => {
+                    const btn = document.getElementById('shareBtn');
+                    if (btn) { const o = btn.textContent; btn.textContent = 'Link copied!'; setTimeout(() => btn.textContent = o, 2000); }
+                });
+            }
+        }
     </script>
     <!-- Dark Mode + Command Palette -->
     <script>
