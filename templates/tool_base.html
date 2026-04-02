@@ -16,13 +16,13 @@
     <nav class="flex items-center space-x-2 text-sm text-gray-500 mb-6">
         <a href="/" class="hover:text-brand-600">Home</a>
         <span>/</span>
-        <span class="text-gray-900">{{ tool.name }}</span>
+        <span class="text-gray-900 dark:text-gray-100">{{ tool.name }}</span>
     </nav>
 
     <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
         <!-- Main Tool Area -->
         <div class="lg:col-span-3">
-            <div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+            <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6 mb-6">
                 <div class="flex items-center space-x-3 mb-6">
                     <div class="w-12 h-12 bg-brand-50 text-brand-600 rounded-lg flex items-center justify-center font-bold text-lg mono">{{ tool.icon }}</div>
                     <div>
@@ -34,7 +34,7 @@
             </div>
 
             <!-- How to use -->
-            <div class="bg-white rounded-xl border border-gray-200 p-6">
+            <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6">
                 <h2 class="text-lg font-semibold mb-3">How to use</h2>
                 {% block how_to_use %}
                 <p class="text-gray-600 text-sm">Paste your input above and get instant results. You can also use the API endpoint for programmatic access.</p>
@@ -48,8 +48,8 @@
             <div class="ad-slot py-8">Ad Space</div>
 
             <!-- Related Tools -->
-            <div class="bg-white rounded-xl border border-gray-200 p-4">
-                <h3 class="font-semibold text-gray-900 mb-3">Related Tools</h3>
+            <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+                <h3 class="font-semibold text-gray-900 dark:text-gray-100 mb-3">Related Tools</h3>
                 <div class="space-y-2">
                     {% for t in tools if t.slug != tool.slug %}
                     {% if loop.index <= 6 %}
