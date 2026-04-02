@@ -621,7 +621,7 @@ async def api_ip_lookup(request: Request):
 
 @app.get("/sitemap.xml")
 async def sitemap(request: Request):
-    base_url = str(request.base_url).rstrip("/")
+    base_url = "https://devpulse.tools"
     urls = [f"  <url><loc>{base_url}/</loc><priority>1.0</priority></url>"]
     for tool in TOOLS:
         urls.append(f"  <url><loc>{base_url}/tool/{tool['slug']}</loc><priority>0.8</priority></url>")
@@ -633,8 +633,7 @@ async def sitemap(request: Request):
 
 @app.get("/robots.txt")
 async def robots(request: Request):
-    base_url = str(request.base_url).rstrip("/")
-    return HTMLResponse(content=f"User-agent: *\nAllow: /\nSitemap: {base_url}/sitemap.xml", media_type="text/plain")
+    return HTMLResponse(content="User-agent: *\nAllow: /\nSitemap: https://devpulse.tools/sitemap.xml", media_type="text/plain")
 
 if __name__ == "__main__":
     import uvicorn
