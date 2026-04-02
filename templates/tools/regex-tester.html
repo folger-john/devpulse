@@ -1,0 +1,20 @@
+{% extends "tool_base.html" %}
+{% block tool_content %}
+<div class="space-y-4">
+    <div><label class="block text-sm font-medium text-gray-700 mb-1">Regular Expression</label><input type="text" id="pattern" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 text-sm mono" placeholder="e.g. \b\w+@\w+\.\w+\b"></div>
+    <div class="flex gap-2">
+        <label class="flex items-center space-x-1 text-sm"><input type="checkbox" id="flagG" checked class="rounded"> <span>global</span></label>
+        <label class="flex items-center space-x-1 text-sm"><input type="checkbox" id="flagI" class="rounded"> <span>case-insensitive</span></label>
+        <label class="flex items-center space-x-1 text-sm"><input type="checkbox" id="flagM" class="rounded"> <span>multiline</span></label>
+    </div>
+    <div><label class="block text-sm font-medium text-gray-700 mb-1">Test String</label><textarea id="testStr" rows="6" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 text-sm" placeholder="Enter text to test against..."></textarea></div>
+    <div id="matchInfo" class="text-sm text-gray-600"></div>
+    <div><label class="block text-sm font-medium text-gray-700 mb-1">Result</label><div id="result" class="bg-gray-50 p-4 rounded-lg min-h-[80px] text-sm mono whitespace-pre-wrap"></div></div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+['pattern','testStr','flagG','flagI','flagM'].forEach(id=>document.getElementById(id).addEventListener('input',test));
+function test(){const p=document.getElementById('pattern').value,t=document.getElementById('testStr').value;if(!p||!t){document.getElementById('result').innerHTML='';document.getElementById('matchInfo').textContent='';return;}try{let f='';if(document.getElementById('flagG').checked)f+='g';if(document.getElementById('flagI').checked)f+='i';if(document.getElementById('flagM').checked)f+='m';const re=new RegExp(p,f),matches=[...t.matchAll(new RegExp(p,f.includes('g')?f:f+'g'))];document.getElementById('matchInfo').textContent=matches.length+' match'+(matches.length!==1?'es':'')+' found';const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));if(matches.length>0){const r=[];let last=0;for(const m of matches){r.push(esc(t.substring(last,m.index)));r.push('<mark class="bg-yellow-200 px-0.5 rounded">'+esc(m[0])+'</mark>');last=m.index+m[0].length;}r.push(esc(t.substring(last)));document.getElementById('result').innerHTML=r.join('');}else{document.getElementById('result').innerHTML=esc(t);}}catch(e){document.getElementById('result').innerHTML='<span class="text-red-500">'+e.message+'</span>';}}
+</script>
+{% endblock %}

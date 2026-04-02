@@ -1,0 +1,38 @@
+{% extends "tool_base.html" %}
+
+{% block tool_content %}
+<div class="space-y-4">
+    <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">Input</label>
+        <textarea id="input" rows="6" class="w-full p-3 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-brand-500" placeholder="Enter text to encode or Base64 string to decode..."></textarea>
+    </div>
+    <div class="flex items-center space-x-3">
+        <button onclick="convert('encode')" class="px-6 py-2 bg-brand-600 text-white rounded-lg font-medium hover:bg-brand-700">Encode</button>
+        <button onclick="convert('decode')" class="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-300">Decode</button>
+        <button onclick="swapFields()" class="px-4 py-2 bg-gray-100 text-gray-600 rounded-lg text-sm hover:bg-gray-200">&#8693; Swap</button>
+    </div>
+    <div>
+        <div class="flex items-center justify-between mb-2">
+            <label class="text-sm font-medium text-gray-700">Output</label>
+            <button onclick="copyToClipboard(document.getElementById('output').value, this)" class="px-3 py-1 bg-brand-600 text-white rounded text-xs hover:bg-brand-700">Copy</button>
+        </div>
+        <textarea id="output" rows="6" class="w-full p-3 border border-gray-300 rounded-lg text-sm bg-gray-50" readonly></textarea>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+async function convert(mode) {
+    const res = await apiCall('/api/base64', { text: document.getElementById('input').value, mode });
+    document.getElementById('output').value = res.success ? res.result : 'Error: ' + res.error;
+}
+function swapFields() {
+    const input = document.getElementById('input');
+    const output = document.getElementById('output');
+    const tmp = input.value;
+    input.value = output.value;
+    output.value = tmp;
+}
+</script>
+{% endblock %}

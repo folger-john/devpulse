@@ -1,0 +1,14 @@
+{% extends "tool_base.html" %}
+{% block tool_content %}
+<div class="space-y-6">
+    <div class="bg-gray-50 p-4 rounded-lg"><h3 class="font-semibold mb-2">Current Time</h3><div id="currentTime" class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm"></div></div>
+    <div><h3 class="font-semibold mb-2">Unix Timestamp → Human Date</h3><div class="flex gap-2"><input type="text" id="tsInput" class="flex-1 p-3 border border-gray-300 rounded-lg text-sm" placeholder="e.g. 1700000000"><button onclick="toHuman()" class="px-4 py-2 bg-brand-600 text-white rounded-lg hover:bg-brand-700 font-medium">Convert</button></div><div id="tsResult" class="mt-2 text-sm text-gray-700"></div></div>
+    <div><h3 class="font-semibold mb-2">Date → Unix Timestamp</h3><div class="flex gap-2"><input type="datetime-local" id="dateInput" class="flex-1 p-3 border border-gray-300 rounded-lg text-sm"><button onclick="toUnix()" class="px-4 py-2 bg-brand-600 text-white rounded-lg hover:bg-brand-700 font-medium">Convert</button></div><div id="dateResult" class="mt-2 text-sm text-gray-700"></div></div>
+</div>
+{% endblock %}
+{% block scripts %}<script>
+async function updateCurrent(){const r=await apiCall('/api/timestamp',{mode:'now'});if(r.success){document.getElementById('currentTime').innerHTML='<div class="p-2 bg-white rounded"><span class="text-gray-500">Unix:</span> <code>'+r.unix+'</code></div><div class="p-2 bg-white rounded"><span class="text-gray-500">Unix (ms):</span> <code>'+r.unix_ms+'</code></div><div class="p-2 bg-white rounded"><span class="text-gray-500">ISO 8601:</span> <code>'+r.iso+'</code></div><div class="p-2 bg-white rounded"><span class="text-gray-500">Human:</span> <code>'+r.human+'</code></div>';}}
+async function toHuman(){const r=await apiCall('/api/timestamp',{mode:'to_human',timestamp:Number(document.getElementById('tsInput').value)});if(r.success)document.getElementById('tsResult').innerHTML='<code>'+r.human+'</code> — <code>'+r.iso+'</code>';}
+async function toUnix(){const r=await apiCall('/api/timestamp',{mode:'to_unix',date:document.getElementById('dateInput').value});if(r.success)document.getElementById('dateResult').innerHTML='Unix: <code>'+r.unix+'</code> — Ms: <code>'+r.unix_ms+'</code>';}
+updateCurrent();setInterval(updateCurrent,1000);
+</script>{% endblock %}

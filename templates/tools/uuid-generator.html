@@ -1,0 +1,24 @@
+{% extends "tool_base.html" %}
+
+{% block tool_content %}
+<div class="space-y-4">
+    <div class="flex items-center space-x-3">
+        <label class="text-sm font-medium text-gray-700">Count:</label>
+        <input type="number" id="count" value="5" min="1" max="100" class="w-20 px-3 py-2 border border-gray-300 rounded-lg text-sm">
+        <button onclick="generate()" class="px-6 py-2 bg-brand-600 text-white rounded-lg font-medium hover:bg-brand-700">Generate</button>
+        <button onclick="copyToClipboard(document.getElementById('output').value, this)" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg text-sm hover:bg-gray-300">Copy All</button>
+    </div>
+    <textarea id="output" rows="12" class="w-full p-3 border border-gray-300 rounded-lg text-sm bg-gray-50 mono" readonly></textarea>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+async function generate() {
+    const count = parseInt(document.getElementById('count').value);
+    const res = await apiCall('/api/uuid', { count });
+    document.getElementById('output').value = res.result.join('\n');
+}
+generate();
+</script>
+{% endblock %}

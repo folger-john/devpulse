@@ -1,0 +1,35 @@
+{% extends "tool_base.html" %}
+
+{% block tool_content %}
+<div class="space-y-4">
+    <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">Input Text</label>
+        <textarea id="input" rows="4" class="w-full p-3 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-brand-500" placeholder="Enter text to hash..."></textarea>
+    </div>
+    <button onclick="generateHash()" class="px-6 py-2 bg-brand-600 text-white rounded-lg font-medium hover:bg-brand-700">Generate Hashes</button>
+    <div id="results" class="space-y-3"></div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+async function generateHash() {
+    const res = await apiCall('/api/hash', { text: document.getElementById('input').value });
+    if (res.success) {
+        const container = document.getElementById('results');
+        container.innerHTML = '';
+        for (const [algo, hash] of Object.entries(res.result)) {
+            container.innerHTML += `
+                <div class="p-3 bg-gray-50 rounded-lg">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-sm font-semibold text-gray-700 uppercase">${algo}</span>
+                        <button onclick="copyToClipboard('${hash}', this)" class="px-2 py-1 bg-brand-600 text-white rounded text-xs hover:bg-brand-700">Copy</button>
+                    </div>
+                    <code class="text-sm text-gray-600 break-all">${hash}</code>
+                </div>`;
+        }
+    }
+}
+document.getElementById('input').addEventListener('input', generateHash);
+</script>
+{% endblock %}

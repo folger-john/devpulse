@@ -1,0 +1,21 @@
+{% extends "tool_base.html" %}
+{% block tool_content %}
+<div class="space-y-4">
+    <div><label class="block text-sm font-medium text-gray-700 mb-1">Cron Expression</label><input type="text" id="input" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 text-sm" placeholder="*/5 * * * *">
+    <div class="text-xs text-gray-400 mt-1">Format: minute hour day-of-month month day-of-week</div></div>
+    <div class="flex flex-wrap gap-2">
+        <button onclick="setExpr('* * * * *')" class="px-3 py-1 bg-gray-100 rounded text-sm hover:bg-gray-200">Every minute</button>
+        <button onclick="setExpr('*/5 * * * *')" class="px-3 py-1 bg-gray-100 rounded text-sm hover:bg-gray-200">Every 5 min</button>
+        <button onclick="setExpr('0 * * * *')" class="px-3 py-1 bg-gray-100 rounded text-sm hover:bg-gray-200">Every hour</button>
+        <button onclick="setExpr('0 0 * * *')" class="px-3 py-1 bg-gray-100 rounded text-sm hover:bg-gray-200">Daily midnight</button>
+        <button onclick="setExpr('0 9 * * 1-5')" class="px-3 py-1 bg-gray-100 rounded text-sm hover:bg-gray-200">Weekdays 9am</button>
+    </div>
+    <button onclick="parse()" class="px-6 py-2 bg-brand-600 text-white rounded-lg hover:bg-brand-700 font-medium">Parse</button>
+    <div id="result" class="hidden space-y-4 fade-in">
+        <div><h3 class="text-sm font-semibold text-gray-700 mb-2">Fields</h3><div id="fields" class="space-y-1"></div></div>
+        <div><h3 class="text-sm font-semibold text-gray-700 mb-2">Next 5 Runs</h3><div id="runs" class="space-y-1"></div></div>
+    </div>
+    <div id="error" class="hidden text-red-600 text-sm bg-red-50 p-3 rounded-lg"></div>
+</div>
+{% endblock %}
+{% block scripts %}<script>function setExpr(e){document.getElementById('input').value=e;parse();}async function parse(){const r=await apiCall('/api/cron-parse',{expression:document.getElementById('input').value});if(r.success){document.getElementById('result').classList.remove('hidden');document.getElementById('error').classList.add('hidden');document.getElementById('fields').innerHTML=r.fields.map(f=>'<div class="text-sm bg-gray-50 p-2 rounded"><code>'+f+'</code></div>').join('');document.getElementById('runs').innerHTML=r.next_runs.map(run=>'<div class="text-sm bg-green-50 text-green-800 p-2 rounded"><code>'+run+'</code></div>').join('');}else{document.getElementById('result').classList.add('hidden');document.getElementById('error').classList.remove('hidden');document.getElementById('error').textContent=r.error;}}</script>{% endblock %}

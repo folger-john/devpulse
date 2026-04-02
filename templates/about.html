@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}About - DevPulse{% endblock %}
+{% block content %}
+<div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <h1 class="text-3xl font-bold mb-6">About DevPulse</h1>
+    <div class="prose prose-lg">
+        <p class="text-gray-600 text-lg mb-6">DevPulse is a collection of <strong>free, fast, and privacy-first</strong> developer tools. Every tool runs instantly with no signup, no tracking, and no data storage.</p>
+
+        <h2 class="text-xl font-semibold mt-8 mb-3">Why we built this</h2>
+        <p class="text-gray-600 mb-4">Developers constantly need quick utilities — formatting JSON, generating UUIDs, encoding Base64, testing regex. Most existing tools are bloated with ads, require signups, or are painfully slow. DevPulse is different.</p>
+
+        <h2 class="text-xl font-semibold mt-8 mb-3">Privacy Promise</h2>
+        <ul class="list-disc pl-6 text-gray-600 space-y-2 mb-4">
+            <li>No data is ever stored on our servers</li>
+            <li>No user accounts or tracking</li>
+            <li>No cookies (except essential ones)</li>
+            <li>All processing is stateless</li>
+        </ul>
+
+        <h2 class="text-xl font-semibold mt-8 mb-3">Free API</h2>
+        <p class="text-gray-600 mb-4">All tools are available via a REST API for programmatic use. <a href="/api" class="text-brand-600 hover:underline">View the API documentation</a>.</p>
+
+        <h2 class="text-xl font-semibold mt-8 mb-3">Contact</h2>
+        <p class="text-gray-600">Questions or suggestions? Reach out at <a href="mailto:hello@devpulse.tools" class="text-brand-600 hover:underline">hello@devpulse.tools</a></p>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "tool_base.html" %}
+{% block tool_content %}
+<div class="space-y-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div><label class="block text-sm font-medium text-gray-700 mb-1">Original Text</label><textarea id="text1" rows="12" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 text-sm" placeholder="Paste original text..."></textarea></div>
+        <div><label class="block text-sm font-medium text-gray-700 mb-1">Modified Text</label><textarea id="text2" rows="12" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 text-sm" placeholder="Paste modified text..."></textarea></div>
+    </div>
+    <button onclick="compare()" class="px-6 py-2 bg-brand-600 text-white rounded-lg hover:bg-brand-700 font-medium">Compare</button>
+    <div id="result" class="bg-gray-50 p-4 rounded-lg min-h-[100px] text-sm mono whitespace-pre-wrap"></div>
+    <div id="stats" class="text-sm text-gray-600"></div>
+</div>
+{% endblock %}
+{% block scripts %}<script>function compare(){const l1=document.getElementById('text1').value.split('\n'),l2=document.getElementById('text2').value.split('\n'),mx=Math.max(l1.length,l2.length);let h='',a=0,rm=0,u=0;const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));for(let i=0;i<mx;i++){const a1=l1[i]||'',a2=l2[i]||'';if(a1===a2){h+='<div class="text-gray-600">  '+esc(a1)+'</div>';u++;}else{if(a1){h+='<div class="bg-red-100 text-red-800">- '+esc(a1)+'</div>';rm++;}if(a2){h+='<div class="bg-green-100 text-green-800">+ '+esc(a2)+'</div>';a++;}}}document.getElementById('result').innerHTML=h||'<span class="text-gray-400">No differences</span>';document.getElementById('stats').textContent=a+' additions, '+rm+' removals, '+u+' unchanged';}</script>{% endblock %}

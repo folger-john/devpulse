@@ -1,0 +1,13 @@
+{% extends "tool_base.html" %}
+{% block tool_content %}
+<div class="space-y-4">
+    <div class="flex gap-2">
+        <button onclick="setMode('encode')" id="encBtn" class="px-4 py-2 bg-brand-600 text-white rounded-lg font-medium">Encode</button>
+        <button onclick="setMode('decode')" id="decBtn" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium">Decode</button>
+    </div>
+    <div><label class="block text-sm font-medium text-gray-700 mb-1">Input</label><textarea id="input" rows="6" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 text-sm" placeholder='<div class="test">Hello</div>'></textarea></div>
+    <button onclick="process()" class="px-6 py-2 bg-brand-600 text-white rounded-lg hover:bg-brand-700 font-medium">Convert</button>
+    <div><div class="flex justify-between items-center mb-1"><label class="text-sm font-medium text-gray-700">Output</label><button onclick="copyToClipboard(document.getElementById('output').value, this)" class="text-xs px-3 py-1 bg-gray-200 rounded hover:bg-gray-300">Copy</button></div><textarea id="output" rows="6" readonly class="w-full p-3 bg-gray-50 border border-gray-300 rounded-lg text-sm"></textarea></div>
+</div>
+{% endblock %}
+{% block scripts %}<script>let mode='encode';function setMode(m){mode=m;document.getElementById('encBtn').className=m==='encode'?'px-4 py-2 bg-brand-600 text-white rounded-lg font-medium':'px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium';document.getElementById('decBtn').className=m==='decode'?'px-4 py-2 bg-brand-600 text-white rounded-lg font-medium':'px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium';}async function process(){const r=await apiCall('/api/html-encode',{text:document.getElementById('input').value,mode});if(r.success)document.getElementById('output').value=r.result;}</script>{% endblock %}

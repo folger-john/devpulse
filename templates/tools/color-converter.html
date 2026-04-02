@@ -1,0 +1,28 @@
+{% extends "tool_base.html" %}
+{% block tool_content %}
+<div class="space-y-4">
+    <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Color (HEX, RGB, or R G B)</label>
+        <input type="text" id="input" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 text-sm" placeholder="#6366f1 or rgb(99, 102, 241)">
+    </div>
+    <button onclick="convert()" class="px-6 py-2 bg-brand-600 text-white rounded-lg hover:bg-brand-700 font-medium">Convert</button>
+    <div id="result" class="hidden fade-in">
+        <div class="grid grid-cols-2 gap-4 mt-4">
+            <div class="p-4 bg-gray-50 rounded-lg"><div class="text-xs text-gray-500 mb-1">Preview</div><div id="preview" class="w-full h-20 rounded-lg border"></div></div>
+            <div class="space-y-3">
+                <div class="p-3 bg-gray-50 rounded-lg"><span class="text-xs text-gray-500">HEX</span><div id="hexVal" class="font-mono font-bold"></div></div>
+                <div class="p-3 bg-gray-50 rounded-lg"><span class="text-xs text-gray-500">RGB</span><div id="rgbVal" class="font-mono font-bold"></div></div>
+                <div class="p-3 bg-gray-50 rounded-lg"><span class="text-xs text-gray-500">HSL</span><div id="hslVal" class="font-mono font-bold"></div></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+async function convert() {
+    const r = await apiCall('/api/color-convert', { color: document.getElementById('input').value });
+    if (r.success) { document.getElementById('result').classList.remove('hidden'); document.getElementById('preview').style.backgroundColor=r.hex; document.getElementById('hexVal').textContent=r.hex; document.getElementById('rgbVal').textContent=r.rgb; document.getElementById('hslVal').textContent=r.hsl; }
+}
+</script>
+{% endblock %}
