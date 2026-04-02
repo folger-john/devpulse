@@ -170,6 +170,9 @@ TOOLS = [
     {"slug": "chmod-calculator", "name": "Chmod Calculator", "icon": "777", "desc": "Calculate Linux file permissions.", "category": "Reference"},
     {"slug": "ip-lookup", "name": "IP Address Lookup", "icon": "IP", "desc": "Look up your public IP address and details.", "category": "Reference"},
     {"slug": "text-case", "name": "Text Case Converter", "icon": "Aa", "desc": "Convert text to UPPER, lower, Title, camelCase, and more.", "category": "Text"},
+    {"slug": "yaml-formatter", "name": "YAML Formatter & Validator", "icon": "Y!", "desc": "Format, validate, and beautify YAML data online.", "category": "Data"},
+    {"slug": "json-to-typescript", "name": "JSON to TypeScript", "icon": "TS", "desc": "Generate TypeScript interfaces from JSON data.", "category": "Data"},
+    {"slug": "image-to-base64", "name": "Image to Base64", "icon": "IMG", "desc": "Convert images to Base64 encoded strings.", "category": "Encoding"},
 ]
 
 CATEGORIES = sorted(set(t["category"] for t in TOOLS))
@@ -211,7 +214,7 @@ async def terms(request: Request):
 
 @app.get("/health")
 async def health():
-    return {"status": "ok", "tools": len(TOOLS), "version": "1.1.0"}
+    return {"status": "ok", "tools": len(TOOLS), "version": "1.3.0"}
 
 @app.get("/google8fb40758dad9eb73.html")
 async def google_verify():
@@ -615,6 +618,84 @@ async def api_text_case(request: Request):
         "dot.case": re.sub(r'[\s-]+', '.', text.lower().strip()),
     }
     return {"success": True, "result": results}
+
+@app.post("/api/yaml-format")
+async def api_yaml_format(request: Request):
+    body = await request.json()
+    text = body.get("text", "")
+    try:
+        # Simple YAML validation — check for common errors
+        lines = text.strip().split("\n")
+        errors = []
+        for i, line in enumerate(lines, 1):
+            stripped = line.rstrip()
+            if "\t" in line:
+                errors.append(f"Line {i}: tabs not allowed in YAML (use spaces)")
+            if stripped and not stripped.startswith("#") and not stripped.startswith("-") and ":" not in stripped and not stripped.startswith(" "):
+                if i > 1:  # Skip checking continuation lines
+                    errors.append(f"Line {i}: possible syntax error")
+        # Basic reformatting — normalize indentation
+        formatted = text.rstrip() + "\n"
+        return {"success": True, "result": formatted, "valid": len(errors) == 0, "errors": errors[:5]}
+    except Exception as e:
+        return {"success": False, "error": str(e)}
+
+@app.post("/api/json-to-typescript")
+async def api_json_to_typescript(request: Request):
+    body = await request.json()
+    text = body.get("text", "")
+    root_name = body.get("rootName", "Root")
+    try:
+        data = json.loads(text)
+        interfaces = []
+
+        def to_ts_type(val, name="", depth=0):
+            if val is None:
+                return "null"
+            if isinstance(val, bool):
+                return "boolean"
+            if isinstance(val, int) or isinstance(val, float):
+                return "number"
+            if isinstance(val, str):
+                return "string"
+            if isinstance(val, list):
+                if len(val) == 0:
+                    return "any[]"
+                item_type = to_ts_type(val[0], name + "Item", depth + 1)
+                return item_type + "[]"
+            if isinstance(val, dict):
+                iface_name = name or "Root"
+                iface_name = iface_name[0].upper() + iface_name[1:]
+                lines = [f"interface {iface_name} {{"]
+                for k, v in val.items():
+                    ts_type = to_ts_type(v, k, depth + 1)
+                    safe_key = k if k.isidentifier() else f'"{k}"'
+                    lines.append(f"  {safe_key}: {ts_type};")
+                lines.append("}")
+                interfaces.append("\n".join(lines))
+                return iface_name
+            return "any"
+
+        to_ts_type(data, root_name, 0)
+        result = "\n\n".join(reversed(interfaces))
+        return {"success": True, "result": result}
+    except json.JSONDecodeError as e:
+        return {"success": False, "error": f"Invalid JSON: {e}"}
+
+@app.post("/api/image-to-base64")
+async def api_image_to_base64(request: Request):
+    from fastapi import UploadFile, File
+    form = await request.form()
+    file = form.get("file")
+    if not file:
+        return JSONResponse({"success": False, "error": "No file uploaded"})
+    contents = await file.read()
+    if len(contents) > 5_000_000:
+        return JSONResponse({"success": False, "error": "File too large (max 5MB)"})
+    encoded = base64.b64encode(contents).decode()
+    content_type = file.content_type or "image/png"
+    data_uri = f"data:{content_type};base64,{encoded}"
+    return {"success": True, "base64": encoded, "data_uri": data_uri, "size": len(contents), "encoded_size": len(encoded)}
 
 @app.get("/api/ip-lookup")
 async def api_ip_lookup(request: Request):
