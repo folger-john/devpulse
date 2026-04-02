@@ -268,11 +268,18 @@ async def api_subscribe(request: Request):
     try:
         resp2 = json.loads(urlreq.urlopen(req2).read())
         card_id = resp2["card"]["id"]
+    except urllib.error.HTTPError as e:
+        error_body = e.read().decode()
+        try:
+            err_detail = json.loads(error_body).get("errors", [{}])[0].get("detail", error_body)
+        except:
+            err_detail = error_body
+        return {"success": False, "error": f"Card storage failed: {err_detail}"}
     except Exception as e:
         return {"success": False, "error": f"Card storage failed: {e}"}
 
     # Step 3: Create subscription
-    plan_ids = {"developer": "JVLFBV3HTD7H2ABKSQVLS56V", "business": "DUJ4TPZXRLPCWHMSL5QCSCFW"}
+    plan_ids = {"developer": "24AWKRCVGOQZPAQUBEI45O3U", "business": "TNYF2U6THLJ2MUPZPVHRN2TO"}
     sub_data = json.dumps({
         "idempotency_key": f"dp-sub-{email}-{int(time.time())}",
         "location_id": SQUARE_LOCATION_ID,
@@ -287,6 +294,13 @@ async def api_subscribe(request: Request):
         resp3 = json.loads(urlreq.urlopen(req3).read())
         if "subscription" not in resp3:
             return {"success": False, "error": str(resp3.get("errors", "Unknown error"))}
+    except urllib.error.HTTPError as e:
+        error_body = e.read().decode()
+        try:
+            err_detail = json.loads(error_body).get("errors", [{}])[0].get("detail", error_body)
+        except:
+            err_detail = error_body
+        return {"success": False, "error": f"Subscription failed: {err_detail}"}
     except Exception as e:
         return {"success": False, "error": f"Subscription failed: {e}"}
 

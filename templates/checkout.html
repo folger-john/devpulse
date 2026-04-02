@@ -39,8 +39,8 @@
 const params = new URLSearchParams(window.location.search);
 const plan = params.get('plan') || 'developer';
 const planConfig = {
-    developer: { name: 'Developer', price: '$9/mo', planId: 'JVLFBV3HTD7H2ABKSQVLS56V', amount: 900 },
-    business: { name: 'Business', price: '$49/mo', planId: 'DUJ4TPZXRLPCWHMSL5QCSCFW', amount: 4900 }
+    developer: { name: 'Developer', price: '$9/mo', planId: '24AWKRCVGOQZPAQUBEI45O3U', amount: 900 },
+    business: { name: 'Business', price: '$49/mo', planId: 'TNYF2U6THLJ2MUPZPVHRN2TO', amount: 4900 }
 };
 const config = planConfig[plan] || planConfig.developer;
 document.getElementById('planName').textContent = config.name;
