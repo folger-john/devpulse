@@ -78,8 +78,8 @@ async function handlePayment() {
             });
             const data = await res.json();
             if (data.success) {
-                status.textContent = 'Subscribed! Your API key: ' + data.api_key;
-                status.className = 'mt-3 text-sm text-center text-green-600 font-mono bg-green-50 p-3 rounded-lg';
+                status.innerHTML = '<div class="text-left"><div class="font-bold text-green-700 text-base mb-2">You\'re subscribed!</div><div class="bg-gray-900 text-green-400 p-3 rounded-lg font-mono text-xs mb-3 break-all select-all">' + data.api_key + '</div><ul class="text-gray-600 text-xs space-y-1"><li>We emailed your API key to <strong>' + email + '</strong></li><li>Square will email you a receipt with a link to <strong>manage or cancel</strong> anytime</li><li>API docs: <a href="/api" class="text-brand-600 underline">devpulse.tools/api</a></li></ul></div>';
+                status.className = 'mt-3 text-sm bg-green-50 p-4 rounded-lg border border-green-200';
                 btn.textContent = 'Subscribed!';
                 btn.classList.remove('bg-brand-600', 'hover:bg-brand-700');
                 btn.classList.add('bg-green-600');

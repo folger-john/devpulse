@@ -318,6 +318,34 @@ async def api_subscribe(request: Request):
     conn.commit()
     conn.close()
 
+    # Email the API key to the customer
+    try:
+        import smtplib as _smtp
+        from email.mime.text import MIMEText as _MT
+        _body = f"""Welcome to DevPulse Pro ({tier.title()})!
+
+Your API Key: {api_key}
+
+Usage:
+  curl -H "x-api-key: {api_key}" https://devpulse.tools/api/hash -X POST -H "Content-Type: application/json" -d '{{"text":"hello"}}'
+
+Rate Limit: {"5,000" if tier == "developer" else "Unlimited"} req/min
+API Docs: https://devpulse.tools/api
+
+To cancel: Check your email for a Square receipt - it has a manage/cancel link.
+
+Questions? Reply to this email.
+-- DevPulse (https://devpulse.tools)
+"""
+        _msg = _MT(_body)
+        _msg["From"] = "DevPulse <noreply@byteoven.com>"
+        _msg["To"] = email
+        _msg["Subject"] = f"Your DevPulse {tier.title()} API Key"
+        with _smtp.SMTP("127.0.0.1", 25, timeout=10) as _s:
+            _s.sendmail(_msg["From"], [email], _msg.as_string())
+    except Exception:
+        pass  # Don't fail the purchase if email fails
+
     return {"success": True, "api_key": api_key, "tier": tier}
 
 @app.get("/google8fb40758dad9eb73.html")
