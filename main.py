@@ -15,6 +15,7 @@ import string
 import html
 from datetime import datetime, timezone
 
+from collections import defaultdict
 from fastapi import FastAPI, Request, Query, Form
 from fastapi.responses import HTMLResponse, JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
@@ -23,6 +24,39 @@ import qrcode
 import io
 
 app = FastAPI(title="DevPulse", version="1.0.0")
+
+# ─── Rate Limiting & Request Size Protection ─────────────────────────────────
+MAX_BODY_SIZE = 500_000  # 500KB max request body
+RATE_LIMIT = 120  # requests per minute per IP
+RATE_WINDOW = 60  # seconds
+
+_rate_store: dict[str, list[float]] = defaultdict(list)
+
+@app.middleware("http")
+async def security_middleware(request: Request, call_next):
+    # Rate limiting for API endpoints
+    if request.url.path.startswith("/api/"):
+        ip = request.headers.get("x-real-ip", request.client.host)
+        now = time.time()
+        # Clean old entries
+        _rate_store[ip] = [t for t in _rate_store[ip] if now - t < RATE_WINDOW]
+        if len(_rate_store[ip]) >= RATE_LIMIT:
+            return JSONResponse(
+                {"error": "Rate limit exceeded. Max 120 requests/minute. See /api for paid tiers."},
+                status_code=429
+            )
+        _rate_store[ip].append(now)
+
+        # Request size check
+        content_length = request.headers.get("content-length")
+        if content_length and int(content_length) > MAX_BODY_SIZE:
+            return JSONResponse(
+                {"error": f"Request body too large. Max {MAX_BODY_SIZE} bytes."},
+                status_code=413
+            )
+
+    response = await call_next(request)
+    return response
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 

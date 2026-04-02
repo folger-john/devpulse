@@ -1,0 +1,11 @@
+;; Domain: devpulse.tools
+;; Exported for Cloudflare import
+;; NOTE: After import, ensure A/AAAA records show orange cloud (Proxied)
+
+;; A Records — point to VPS
+devpulse.tools.	1	IN	A	15.204.93.98
+www.devpulse.tools.	1	IN	A	15.204.93.98
+
+;; AAAA Records — IPv6
+devpulse.tools.	1	IN	AAAA	2604:2dc0:202:300::2ea2
+www.devpulse.tools.	1	IN	AAAA	2604:2dc0:202:300::2ea2
