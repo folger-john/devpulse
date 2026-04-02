@@ -213,6 +213,10 @@ async def terms(request: Request):
 async def health():
     return {"status": "ok", "tools": len(TOOLS), "version": "1.1.0"}
 
+@app.get("/google8fb40758dad9eb73.html")
+async def google_verify():
+    return HTMLResponse("google-site-verification: google8fb40758dad9eb73.html")
+
 # ─── API Endpoints ───────────────────────────────────────────────────────────
 
 @app.post("/api/json-format")
