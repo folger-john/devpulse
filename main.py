@@ -217,6 +217,10 @@ async def health():
 async def google_verify():
     return HTMLResponse("google-site-verification: google8fb40758dad9eb73.html")
 
+@app.get("/d3vpuls3t00ls2026.txt")
+async def indexnow_key():
+    return HTMLResponse("d3vpuls3t00ls2026", media_type="text/plain")
+
 # ─── API Endpoints ───────────────────────────────────────────────────────────
 
 @app.post("/api/json-format")
