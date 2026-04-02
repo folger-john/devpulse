@@ -1,0 +1,32 @@
+{
+  "name": "devpulse-cli",
+  "version": "1.0.0",
+  "description": "DevPulse developer utilities CLI — JSON formatting, base64, hashing, UUIDs, passwords, timestamps, and URL encoding from your terminal.",
+  "bin": {
+    "devpulse": "./bin/devpulse.js"
+  },
+  "keywords": [
+    "devtools",
+    "json",
+    "base64",
+    "hash",
+    "uuid",
+    "password-generator",
+    "timestamp",
+    "url-encode",
+    "cli"
+  ],
+  "author": "DevPulse <hello@devpulse.tools>",
+  "license": "MIT",
+  "homepage": "https://devpulse.tools",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/devpulse/devpulse-cli"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "files": [
+    "bin/"
+  ]
+}

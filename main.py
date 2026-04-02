@@ -204,6 +204,10 @@ async def about(request: Request):
 async def api_docs(request: Request):
     return templates.TemplateResponse(request, "api_docs.html", {"tools": TOOLS})
 
+@app.get("/pricing", response_class=HTMLResponse)
+async def pricing(request: Request):
+    return templates.TemplateResponse(request, "pricing.html", {"tools": TOOLS})
+
 @app.get("/privacy", response_class=HTMLResponse)
 async def privacy(request: Request):
     return templates.TemplateResponse(request, "privacy.html")
@@ -223,6 +227,72 @@ async def google_verify():
 @app.get("/d3vpuls3t00ls2026.txt")
 async def indexnow_key():
     return HTMLResponse("d3vpuls3t00ls2026", media_type="text/plain")
+
+# ─── Newsletter Signup ────────────────────────────────────────────────────────
+@app.post("/api/newsletter/subscribe")
+async def newsletter_subscribe(request: Request):
+    body = await request.json()
+    email = body.get("email", "").strip()
+    if not email or "@" not in email:
+        return {"success": False, "error": "Valid email required"}
+    conn = sqlite3.connect(DB_PATH)
+    conn.execute("CREATE TABLE IF NOT EXISTS newsletter (id INTEGER PRIMARY KEY, email TEXT UNIQUE, created_at TEXT DEFAULT CURRENT_TIMESTAMP)")
+    try:
+        conn.execute("INSERT INTO newsletter (email) VALUES (?)", (email,))
+        conn.commit()
+    except sqlite3.IntegrityError:
+        pass  # Already subscribed
+    conn.close()
+    return {"success": True, "message": "Subscribed!"}
+
+# ─── Programmatic SEO Pages ──────────────────────────────────────────────────
+# Generate variations like /tools/json-formatter/minify, /tools/json-formatter/validate
+SEO_VARIATIONS = {
+    "json-formatter": [
+        {"suffix": "minify", "title": "JSON Minifier Online", "desc": "Minify and compress JSON data to reduce file size. Free online JSON minifier tool."},
+        {"suffix": "validate", "title": "JSON Validator Online", "desc": "Validate JSON syntax and check for errors instantly. Free online JSON validator."},
+        {"suffix": "beautify", "title": "JSON Beautifier Online", "desc": "Beautify and pretty-print JSON with customizable indentation. Free online tool."},
+    ],
+    "base64": [
+        {"suffix": "image", "title": "Base64 Image Encoder Online", "desc": "Convert images to Base64 encoded strings for embedding in HTML and CSS."},
+        {"suffix": "file", "title": "Base64 File Encoder Online", "desc": "Encode any file to Base64 format. Free online Base64 file encoder."},
+    ],
+    "hash-generator": [
+        {"suffix": "md5", "title": "MD5 Hash Generator Online", "desc": "Generate MD5 hash checksums from any text. Free online MD5 generator."},
+        {"suffix": "sha256", "title": "SHA-256 Hash Generator Online", "desc": "Generate SHA-256 hashes for text and files. Free online SHA-256 tool."},
+        {"suffix": "sha1", "title": "SHA-1 Hash Generator Online", "desc": "Generate SHA-1 hash values from text. Free online SHA-1 generator."},
+    ],
+    "password-generator": [
+        {"suffix": "strong", "title": "Strong Password Generator Online", "desc": "Generate cryptographically strong passwords with custom length and complexity."},
+        {"suffix": "memorable", "title": "Memorable Password Generator", "desc": "Generate easy-to-remember but secure passwords using word combinations."},
+    ],
+    "url-encode": [
+        {"suffix": "query-string", "title": "URL Query String Encoder Online", "desc": "Encode query string parameters for safe URL usage. Free online tool."},
+    ],
+    "regex-tester": [
+        {"suffix": "cheat-sheet", "title": "Regex Cheat Sheet & Tester", "desc": "Regular expression cheat sheet with live testing. Common regex patterns and examples."},
+    ],
+    "css-minifier": [
+        {"suffix": "beautify", "title": "CSS Beautifier & Formatter Online", "desc": "Beautify and format minified CSS code. Free online CSS formatter."},
+    ],
+    "sql-formatter": [
+        {"suffix": "minify", "title": "SQL Minifier Online", "desc": "Minify SQL queries by removing whitespace and comments. Free online tool."},
+    ],
+}
+
+@app.get("/tool/{slug}/{variation}", response_class=HTMLResponse)
+async def tool_variation(request: Request, slug: str, variation: str):
+    tool = next((t for t in TOOLS if t["slug"] == slug), None)
+    if not tool or slug not in SEO_VARIATIONS:
+        return templates.TemplateResponse(request, "404.html", status_code=404)
+    var = next((v for v in SEO_VARIATIONS[slug] if v["suffix"] == variation), None)
+    if not var:
+        return templates.TemplateResponse(request, "404.html", status_code=404)
+    # Render the same tool template but with SEO-optimized title/desc
+    return templates.TemplateResponse(request, f"tools/{slug}.html", {
+        "tool": {**tool, "name": var["title"], "desc": var["desc"]},
+        "tools": TOOLS,
+    })
 
 # ─── API Endpoints ───────────────────────────────────────────────────────────
 
@@ -710,6 +780,9 @@ async def sitemap(request: Request):
     urls = [f"  <url><loc>{base_url}/</loc><priority>1.0</priority></url>"]
     for tool in TOOLS:
         urls.append(f"  <url><loc>{base_url}/tool/{tool['slug']}</loc><priority>0.8</priority></url>")
+    for slug, variations in SEO_VARIATIONS.items():
+        for var in variations:
+            urls.append(f"  <url><loc>{base_url}/tool/{slug}/{var['suffix']}</loc><priority>0.6</priority></url>")
     xml = f"""<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 {chr(10).join(urls)}

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}{{ tool.name }} Online - Free Tool | DevPulse{% endblock %}
+{% block title %}{% if 'Online' in tool.name %}{{ tool.name }} - Free Tool | DevPulse{% else %}{{ tool.name }} Online - Free Tool | DevPulse{% endif %}{% endblock %}
 {% block description %}{{ tool.desc }} Free online tool by DevPulse. No signup required.{% endblock %}
 {% block jsonld %}
 <script type="application/ld+json">
@@ -73,6 +73,31 @@
                 <h3 class="font-semibold text-brand-900 mb-2">Use via API</h3>
                 <p class="text-sm text-brand-700 mb-3">Integrate this tool into your workflow with our free REST API.</p>
                 <a href="/api" class="text-sm text-brand-600 font-medium hover:underline">View API docs &rarr;</a>
+            </div>
+
+            <!-- Embed This Tool -->
+            <div class="bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+                <h3 class="font-semibold text-gray-900 dark:text-gray-100 mb-2">Embed This Tool</h3>
+                <p class="text-xs text-gray-500 mb-2">Add this tool to your site or blog:</p>
+                <textarea readonly onclick="this.select()" class="w-full p-2 bg-gray-900 text-green-400 rounded text-xs h-16 resize-none">&lt;iframe src="https://devpulse.tools/tool/{{ tool.slug }}" width="100%" height="500" frameborder="0"&gt;&lt;/iframe&gt;</textarea>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="bg-gradient-to-br from-brand-600 to-purple-700 rounded-xl p-4 text-white">
+                <h3 class="font-semibold mb-2">Dev Tools Newsletter</h3>
+                <p class="text-xs text-brand-200 mb-3">New tools, tips, and updates. No spam.</p>
+                <form action="/api/newsletter/subscribe" method="POST" onsubmit="return subscribeNewsletter(event)">
+                    <input type="email" id="nlEmail" placeholder="you@email.com" class="w-full px-3 py-2 rounded-lg text-gray-900 text-sm mb-2" required>
+                    <button type="submit" class="w-full px-3 py-2 bg-white text-brand-700 rounded-lg text-sm font-medium hover:bg-brand-50">Subscribe</button>
+                </form>
+                <div id="nlMsg" class="text-xs mt-2 hidden"></div>
+            </div>
+
+            <!-- Self-Host -->
+            <div class="bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+                <h3 class="font-semibold text-gray-900 dark:text-gray-100 mb-2">Self-Host DevPulse</h3>
+                <p class="text-xs text-gray-500 mb-2">Run your own instance in 60 seconds on any cloud.</p>
+                <a href="https://github.com/folger-john/devpulse" class="text-sm text-brand-600 font-medium hover:underline block mb-1">View on GitHub &rarr;</a>
             </div>
         </div>
     </div>

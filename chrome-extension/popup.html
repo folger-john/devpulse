@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=380">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <img src="icons/icon-48.png" alt="DevPulse">
+    <div>
+      <div class="title">DevPulse Tools</div>
+      <div class="sub">Paste anything. We'll handle it.</div>
+    </div>
+  </div>
+
+  <!-- Search -->
+  <div class="search-wrap">
+    <span class="icon">&#128269;</span>
+    <input type="text" id="search" placeholder="Search tools..." autocomplete="off">
+  </div>
+
+  <!-- Quick Paste -->
+  <div class="paste-section">
+    <label>Quick Paste</label>
+    <textarea id="quickPaste" placeholder="Paste JSON, JWT, Base64, a timestamp, UUID..."></textarea>
+    <div class="detect-bar" id="detectBar">
+      <span class="type" id="detectType"></span>
+      <a href="#" id="detectLink" target="_blank">Open tool &rarr;</a>
+    </div>
+  </div>
+
+  <!-- Popular Tools -->
+  <div class="section-label">Popular Tools</div>
+  <div class="tools-grid" id="toolsGrid">
+    <!-- Populated by popup.js -->
+  </div>
+
+  <!-- No results -->
+  <div class="no-results" id="noResults">No tools match your search.</div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <a href="https://devpulse.tools" target="_blank">Open devpulse.tools &rarr; All 25+ tools</a>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
