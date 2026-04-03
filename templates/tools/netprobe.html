@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+
+{% block title %}NetProbe - Free IP & Port Scanner for Android | DevPulse{% endblock %}
+{% block description %}Free Android IP and port scanner with network discovery, ping, whois lookup, and scan history. Lightweight network diagnostic tool for sysadmins and developers.{% endblock %}
+{% block og_title %}NetProbe - IP & Port Scanner for Android{% endblock %}
+{% block og_description %}Free IP & port scanner for Android. Scan ports, discover network devices, ping hosts, whois lookup — all from your phone.{% endblock %}
+
+{% block jsonld %}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"MobileApplication","name":"NetProbe","operatingSystem":"Android","applicationCategory":"UtilitiesApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free IP & port scanner for Android with network discovery, ping, whois, and scan history.","author":{"@type":"Organization","name":"DevPulse","url":"https://devpulse.tools"}}
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto px-4 py-8">
+
+    <!-- Hero -->
+    <div class="bg-gray-800 rounded-2xl p-8 mb-8 border border-gray-700">
+        <div class="flex flex-col md:flex-row items-center gap-8">
+            <div class="w-24 h-24 bg-gray-900 rounded-2xl flex items-center justify-center text-4xl border border-gray-600">
+                <span class="text-teal-400">((</span><span class="text-yellow-400">&bull;</span><span class="text-teal-400">))</span>
+            </div>
+            <div class="flex-1 text-center md:text-left">
+                <h1 class="text-3xl font-bold text-white mb-2">NetProbe</h1>
+                <p class="text-xl text-gray-300 mb-4">Free IP & Port Scanner for Android</p>
+                <p class="text-gray-400 mb-6">A lightweight network diagnostic tool for sysadmins and developers. Scan ports, discover devices on your network, ping hosts, and look up domain info — all from your phone. No account required, no data collected.</p>
+                <div class="flex flex-wrap gap-3 justify-center md:justify-start">
+                    <a href="#download" class="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-lg font-medium transition">
+                        Download APK
+                    </a>
+                    <a href="#features" class="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-medium transition">
+                        Features
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features -->
+    <div id="features" class="mb-12">
+        <h2 class="text-2xl font-bold text-white mb-6">Features</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🔍</div>
+                <h3 class="text-white font-semibold mb-1">Port Scanner</h3>
+                <p class="text-gray-400 text-sm">TCP connect scan with concurrent connections. Presets for common, web, database, and full range (1-1024). Service name detection for 50+ well-known ports.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">📡</div>
+                <h3 class="text-white font-semibold mb-1">Network Discovery</h3>
+                <p class="text-gray-400 text-sm">Scan your local /24 subnet to find all devices. Shows IP, hostname, and open ports for each discovered device.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🏓</div>
+                <h3 class="text-white font-semibold mb-1">Ping</h3>
+                <p class="text-gray-400 text-sm">ICMP ping with parsed statistics — packets sent/received, loss %, and min/avg/max RTT latency.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🌐</div>
+                <h3 class="text-white font-semibold mb-1">Whois / RDAP Lookup</h3>
+                <p class="text-gray-400 text-sm">Look up domain and IP registration info via RDAP protocol. See registrar, nameservers, and status.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">📋</div>
+                <h3 class="text-white font-semibold mb-1">Device Network Info</h3>
+                <p class="text-gray-400 text-sm">View your device's IP, gateway, DNS servers, MAC address, network type, and external IP at a glance.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">📜</div>
+                <h3 class="text-white font-semibold mb-1">Scan History</h3>
+                <p class="text-gray-400 text-sm">All scan results saved locally with timestamps and duration. Tap to view details, swipe to delete.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">⚡</div>
+                <h3 class="text-white font-semibold mb-1">Fast & Concurrent</h3>
+                <p class="text-gray-400 text-sm">Parallel scanning with configurable concurrency (100 ports / 50 hosts simultaneously). Scans complete in seconds.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🌙</div>
+                <h3 class="text-white font-semibold mb-1">Dark Theme</h3>
+                <p class="text-gray-400 text-sm">Beautiful Catppuccin Mocha dark theme. Easy on the eyes for late-night network troubleshooting.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🔒</div>
+                <h3 class="text-white font-semibold mb-1">Security First</h3>
+                <p class="text-gray-400 text-sm">Input validation prevents injection attacks. No data leaves your device. Cleartext only for private network ranges.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Port Presets -->
+    <div class="mb-12">
+        <h2 class="text-2xl font-bold text-white mb-6">Scan Presets</h2>
+        <div class="bg-gray-800 rounded-lg border border-gray-700 overflow-hidden">
+            <table class="w-full text-left">
+                <thead class="bg-gray-900">
+                    <tr>
+                        <th class="px-6 py-3 text-gray-300 text-sm">Preset</th>
+                        <th class="px-6 py-3 text-gray-300 text-sm">Ports Scanned</th>
+                        <th class="px-6 py-3 text-gray-300 text-sm">Use Case</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-700">
+                    <tr>
+                        <td class="px-6 py-3 text-white font-medium">Common</td>
+                        <td class="px-6 py-3 text-gray-400">21, 22, 23, 25, 53, 80, 110, 143, 443, 993, 995, 3306, 3389, 5432, 8080, 8443</td>
+                        <td class="px-6 py-3 text-gray-400">General purpose</td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-3 text-white font-medium">Web</td>
+                        <td class="px-6 py-3 text-gray-400">80, 443, 8080, 8443, 3000, 5000, 8000, 8888</td>
+                        <td class="px-6 py-3 text-gray-400">Web servers & dev ports</td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-3 text-white font-medium">Database</td>
+                        <td class="px-6 py-3 text-gray-400">3306, 5432, 27017, 6379, 1433, 1521, 5984, 9200</td>
+                        <td class="px-6 py-3 text-gray-400">MySQL, Postgres, Mongo, Redis, etc.</td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-3 text-white font-medium">All</td>
+                        <td class="px-6 py-3 text-gray-400">1 - 1024</td>
+                        <td class="px-6 py-3 text-gray-400">Full well-known ports range</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Download -->
+    <div id="download" class="mb-12">
+        <h2 class="text-2xl font-bold text-white mb-6">Download</h2>
+        <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+            <div class="flex flex-col sm:flex-row items-center gap-6">
+                <div class="flex-1">
+                    <p class="text-gray-300 mb-2"><strong>Version:</strong> 1.0.0</p>
+                    <p class="text-gray-300 mb-2"><strong>Size:</strong> ~10 MB</p>
+                    <p class="text-gray-300 mb-2"><strong>Requires:</strong> Android 8.0+ (API 26)</p>
+                    <p class="text-gray-300 mb-4"><strong>Price:</strong> Free (ad-supported)</p>
+                    <p class="text-gray-500 text-sm">Google Play listing coming soon.</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-gray-500 text-xs mt-2 mb-2">Direct APK download:</p>
+                    <a href="/static/downloads/netprobe-latest.apk" class="inline-block bg-teal-600 hover:bg-teal-700 text-white px-8 py-3 rounded-lg font-medium transition">
+                        Download APK
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Security -->
+    <div class="mb-12">
+        <h2 class="text-2xl font-bold text-white mb-6">Security & Privacy</h2>
+        <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+            <ul class="space-y-3 text-gray-300">
+                <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#10003;</span> No account required — works completely offline for local scans</li>
+                <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#10003;</span> No data collected, no analytics, no tracking</li>
+                <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#10003;</span> All scan results stored locally on your device only</li>
+                <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#10003;</span> Input validation prevents command injection attacks</li>
+                <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#10003;</span> Cleartext traffic restricted to private network ranges only</li>
+                <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#10003;</span> ProGuard/R8 obfuscation in release builds</li>
+                <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#10003;</span> Android backup disabled — scan data can't be extracted via adb</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Disclaimer -->
+    <div class="mb-12">
+        <div class="bg-yellow-900/30 rounded-lg p-6 border border-yellow-700/50">
+            <h3 class="text-yellow-400 font-semibold mb-2">Authorized Use Only</h3>
+            <p class="text-gray-300 text-sm">NetProbe is a network diagnostic tool intended for authorized use only. You must only scan networks and devices that you own or have explicit permission to test. Unauthorized scanning may violate applicable laws.</p>
+        </div>
+    </div>
+
+    <!-- Legal Links -->
+    <div class="text-center text-gray-500 text-sm">
+        <a href="/netprobe/privacy" class="hover:text-gray-300 transition">Privacy Policy</a>
+        <span class="mx-2">|</span>
+        <a href="/netprobe/terms" class="hover:text-gray-300 transition">Terms of Service</a>
+        <span class="mx-2">|</span>
+        <span>support@byteoven.com</span>
+    </div>
+
+</div>
+{% endblock %}

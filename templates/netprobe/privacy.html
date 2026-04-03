@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Privacy Policy - NetProbe | DevPulse{% endblock %}
+{% block description %}Privacy policy for NetProbe IP & Port Scanner for Android.{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto px-4 py-8">
+    <nav class="text-sm text-gray-500 mb-6">
+        <a href="/" class="hover:text-gray-300">DevPulse</a> /
+        <a href="/tool/netprobe" class="hover:text-gray-300">NetProbe</a> /
+        <span class="text-gray-400">Privacy Policy</span>
+    </nav>
+
+    <h1 class="text-3xl font-bold text-white mb-2">Privacy Policy</h1>
+    <p class="text-gray-500 mb-8">Last updated: April 3, 2026</p>
+
+    <div class="bg-blue-900/30 border border-blue-700/50 rounded-lg p-4 mb-8">
+        <p class="text-blue-300"><strong>Summary:</strong> NetProbe does not collect, transmit, or share your personal data. Scan results are stored locally on your device only. We use Google AdMob for ads, which has its own data collection practices.</p>
+    </div>
+
+    <div class="prose prose-invert max-w-none space-y-6">
+        <h2 class="text-xl font-semibold text-white">1. Data We Collect</h2>
+
+        <h3 class="text-lg font-medium text-green-400">Data stored locally on your device:</h3>
+        <ul class="text-gray-300 space-y-2 list-disc pl-5">
+            <li><strong>Scan results:</strong> Port scan results, network discovery results, and ping results are stored in a local database on your device for your scan history.</li>
+            <li><strong>Preferences:</strong> App settings such as whether the disclaimer has been shown are stored in SharedPreferences.</li>
+        </ul>
+
+        <h3 class="text-lg font-medium text-green-400">Data we do NOT collect:</h3>
+        <ul class="text-gray-300 space-y-2 list-disc pl-5">
+            <li>We do not collect or transmit your scan targets, results, or network information to any server.</li>
+            <li>We do not track your usage, scans, or activity.</li>
+            <li>We do not have analytics or telemetry.</li>
+            <li>We do not collect your IP address, device identifiers, or location.</li>
+        </ul>
+
+        <h2 class="text-xl font-semibold text-white">2. Network Requests</h2>
+        <p class="text-gray-300">NetProbe makes the following network requests as part of its core functionality:</p>
+        <ul class="text-gray-300 space-y-2 list-disc pl-5">
+            <li><strong>Port scanning:</strong> TCP connections to the target host/ports you specify.</li>
+            <li><strong>Network discovery:</strong> Connections to devices on your local network.</li>
+            <li><strong>Ping:</strong> ICMP echo requests to the host you specify.</li>
+            <li><strong>Whois/RDAP:</strong> HTTPS requests to rdap.org for domain/IP lookups you initiate.</li>
+            <li><strong>External IP:</strong> HTTPS request to api.ipify.org to determine your public IP address.</li>
+        </ul>
+        <p class="text-gray-300">All of these requests are initiated by you and are not automated or background processes.</p>
+
+        <h2 class="text-xl font-semibold text-white">3. Third-Party Services</h2>
+        <h3 class="text-lg font-medium text-yellow-400">Google AdMob</h3>
+        <p class="text-gray-300">The App displays advertisements via Google AdMob. Google may collect device identifiers, IP addresses, and usage data for ad targeting and measurement. This is governed by <a href="https://policies.google.com/privacy" class="text-blue-400 hover:underline">Google's Privacy Policy</a>.</p>
+
+        <h2 class="text-xl font-semibold text-white">4. Data Security</h2>
+        <ul class="text-gray-300 space-y-2 list-disc pl-5">
+            <li>All scan data is stored locally in an on-device Room database.</li>
+            <li>The app database cannot be extracted via Android backup (backup is disabled).</li>
+            <li>Input validation prevents command injection and other security attacks.</li>
+            <li>Cleartext network traffic is restricted to private network IP ranges only.</li>
+        </ul>
+
+        <h2 class="text-xl font-semibold text-white">5. Data Retention</h2>
+        <p class="text-gray-300">All data is stored locally on your device. You can clear scan history at any time within the app. Uninstalling the App deletes all stored data.</p>
+
+        <h2 class="text-xl font-semibold text-white">6. Children's Privacy</h2>
+        <p class="text-gray-300">The App is not directed at children under 13. We do not knowingly collect information from children.</p>
+
+        <h2 class="text-xl font-semibold text-white">7. Changes to This Policy</h2>
+        <p class="text-gray-300">We may update this Privacy Policy from time to time. The updated version will be accessible within the App and at this URL.</p>
+
+        <h2 class="text-xl font-semibold text-white">8. Contact</h2>
+        <p class="text-gray-300">For questions about this privacy policy, contact us at <a href="mailto:support@byteoven.com" class="text-blue-400 hover:underline">support@byteoven.com</a></p>
+    </div>
+</div>
+{% endblock %}

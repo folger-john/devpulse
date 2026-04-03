@@ -173,6 +173,8 @@ TOOLS = [
     {"slug": "yaml-formatter", "name": "YAML Formatter & Validator", "icon": "Y!", "desc": "Format, validate, and beautify YAML data online.", "category": "Data"},
     {"slug": "json-to-typescript", "name": "JSON to TypeScript", "icon": "TS", "desc": "Generate TypeScript interfaces from JSON data.", "category": "Data"},
     {"slug": "image-to-base64", "name": "Image to Base64", "icon": "IMG", "desc": "Convert images to Base64 encoded strings.", "category": "Encoding"},
+    {"slug": "shellpad", "name": "ShellPad", "icon": "</>", "desc": "Free SSH & Telnet client for Android. Tabbed sessions, xterm.js terminal, TOFU host verification.", "category": "Apps"},
+    {"slug": "netprobe", "name": "NetProbe", "icon": "((•))", "desc": "Free IP & port scanner for Android. Network discovery, ping, whois, scan history.", "category": "Apps"},
 ]
 
 CATEGORIES = sorted(set(t["category"] for t in TOOLS))
@@ -199,6 +201,26 @@ async def tool_page(request: Request, slug: str):
 @app.get("/about", response_class=HTMLResponse)
 async def about(request: Request):
     return templates.TemplateResponse(request, "about.html")
+
+# ─── ShellPad App Pages ─────────────────────────────────────────────────────
+
+@app.get("/shellpad/privacy", response_class=HTMLResponse)
+async def shellpad_privacy(request: Request):
+    return templates.TemplateResponse(request, "shellpad/privacy.html")
+
+@app.get("/shellpad/terms", response_class=HTMLResponse)
+async def shellpad_terms(request: Request):
+    return templates.TemplateResponse(request, "shellpad/terms.html")
+
+# ─── NetProbe App Pages ──────────────────────────────────────────────────────
+
+@app.get("/netprobe/privacy", response_class=HTMLResponse)
+async def netprobe_privacy(request: Request):
+    return templates.TemplateResponse(request, "netprobe/privacy.html")
+
+@app.get("/netprobe/terms", response_class=HTMLResponse)
+async def netprobe_terms(request: Request):
+    return templates.TemplateResponse(request, "netprobe/terms.html")
 
 @app.get("/api", response_class=HTMLResponse)
 async def api_docs(request: Request):

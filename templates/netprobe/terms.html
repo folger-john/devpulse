@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Terms of Service - NetProbe | DevPulse{% endblock %}
+{% block description %}Terms of service for NetProbe IP & Port Scanner for Android.{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto px-4 py-8">
+    <nav class="text-sm text-gray-500 mb-6">
+        <a href="/" class="hover:text-gray-300">DevPulse</a> /
+        <a href="/tool/netprobe" class="hover:text-gray-300">NetProbe</a> /
+        <span class="text-gray-400">Terms of Service</span>
+    </nav>
+
+    <h1 class="text-3xl font-bold text-white mb-2">Terms of Service</h1>
+    <p class="text-gray-500 mb-8">Last updated: April 3, 2026</p>
+
+    <div class="prose prose-invert max-w-none space-y-6">
+        <h2 class="text-xl font-semibold text-white">1. Acceptance of Terms</h2>
+        <p class="text-gray-300">By downloading, installing, or using NetProbe ("the App"), you agree to be bound by these Terms of Service. If you do not agree, do not use the App.</p>
+
+        <h2 class="text-xl font-semibold text-white">2. Description of Service</h2>
+        <p class="text-gray-300">NetProbe is a network diagnostic tool that allows you to scan IP addresses and ports, discover devices on local networks, ping hosts, and perform domain lookups. The App is intended for authorized network diagnostics and troubleshooting only.</p>
+
+        <h2 class="text-xl font-semibold text-white">3. Authorized Use Only</h2>
+        <div class="bg-yellow-900/30 border border-yellow-700/50 rounded-lg p-4">
+            <p class="text-yellow-300"><strong>Important:</strong> You must only scan networks and devices that you own or have explicit written permission to test. Unauthorized port scanning or network probing may violate federal and state computer fraud laws, including the Computer Fraud and Abuse Act (CFAA).</p>
+        </div>
+        <ul class="text-gray-300 space-y-2 list-disc pl-5">
+            <li>You are solely responsible for ensuring you have authorization to scan any target.</li>
+            <li>You agree not to use the App to attack, disrupt, or gain unauthorized access to any system.</li>
+            <li>You agree not to use the App for any illegal or unauthorized purpose.</li>
+            <li>You are responsible for complying with all applicable laws and regulations in your jurisdiction.</li>
+        </ul>
+
+        <h2 class="text-xl font-semibold text-white">4. No Warranty</h2>
+        <p class="text-gray-300">The App is provided "AS IS" without warranty of any kind, express or implied. We do not guarantee that the App will be uninterrupted, error-free, or that scan results will be complete or accurate. Use of the App is at your own risk.</p>
+
+        <h2 class="text-xl font-semibold text-white">5. Limitation of Liability</h2>
+        <p class="text-gray-300">In no event shall the developers of NetProbe be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of data, loss of profits, or damage to systems resulting from your use of the App. You assume all responsibility and liability for your use of the scanning functionality.</p>
+
+        <h2 class="text-xl font-semibold text-white">6. Third-Party Services</h2>
+        <p class="text-gray-300">The App uses Google AdMob for advertising. Google's advertising services are subject to <a href="https://policies.google.com/terms" class="text-blue-400 hover:underline">Google's Terms of Service</a> and <a href="https://policies.google.com/privacy" class="text-blue-400 hover:underline">Privacy Policy</a>.</p>
+        <p class="text-gray-300">The App may make requests to third-party services (rdap.org, api.ipify.org) for whois lookups and external IP detection. These services have their own terms and privacy policies.</p>
+
+        <h2 class="text-xl font-semibold text-white">7. Modifications</h2>
+        <p class="text-gray-300">We reserve the right to modify these terms at any time. Continued use of the App after changes constitutes acceptance of the new terms.</p>
+
+        <h2 class="text-xl font-semibold text-white">8. Contact</h2>
+        <p class="text-gray-300">For questions about these terms, contact us at <a href="mailto:support@byteoven.com" class="text-blue-400 hover:underline">support@byteoven.com</a></p>
+    </div>
+</div>
+{% endblock %}
