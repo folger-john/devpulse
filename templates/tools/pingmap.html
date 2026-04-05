@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block title %}PingMap - Visual Traceroute & Latency Mapper for Android | DevPulse{% endblock %}
+{% block description %}Free Android visual traceroute and latency mapper with real-time ping graphs, per-hop latency stats, packet loss detection, and network path visualization.{% endblock %}
+{% block og_title %}PingMap - Visual Traceroute for Android{% endblock %}
+{% block og_description %}Free visual traceroute and latency mapper for Android. Real-time ping graphs, hop diagrams, and packet loss detection.{% endblock %}
+
+{% block jsonld %}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"MobileApplication","name":"PingMap","operatingSystem":"Android","applicationCategory":"UtilitiesApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free visual traceroute and latency mapper for Android with real-time ping graphs, per-hop stats, and packet loss detection.","author":{"@type":"Organization","name":"DevPulse","url":"https://devpulse.tools"}}
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto px-4 py-8">
+
+    <!-- Hero -->
+    <div class="bg-gray-800 rounded-2xl p-8 mb-8 border border-gray-700">
+        <div class="flex flex-col md:flex-row items-center gap-8">
+            <img src="/static/img/apps/pingmap_icon_512.png" alt="PingMap" class="w-24 h-24 rounded-2xl border border-gray-600">
+            <div class="flex-1 text-center md:text-left">
+                <h1 class="text-3xl font-bold text-white mb-2">PingMap</h1>
+                <p class="text-xl text-gray-300 mb-4">Visual Traceroute & Latency Mapper for Android</p>
+                <p class="text-gray-400 mb-6">See exactly where your packets go and how long each hop takes. Visual traceroute diagrams, continuous ping with real-time graphs, and detailed latency stats - all from your phone.</p>
+                <div class="flex flex-wrap gap-3 justify-center md:justify-start">
+                    <a href="#download" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition">
+                        Download APK
+                    </a>
+                    <a href="#features" class="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-medium transition">
+                        Features
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features -->
+    <div id="features" class="mb-12">
+        <h2 class="text-2xl font-bold text-white mb-6">Features</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🗺️</div>
+                <h3 class="text-white font-semibold mb-1">Visual Traceroute</h3>
+                <p class="text-gray-400 text-sm">See your network path as a visual hop diagram. Each node shows IP, hostname, and latency.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">📈</div>
+                <h3 class="text-white font-semibold mb-1">Real-Time Ping Graph</h3>
+                <p class="text-gray-400 text-sm">Continuous ping with a live-updating latency graph. Spot jitter and spikes instantly.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">📊</div>
+                <h3 class="text-white font-semibold mb-1">Per-Hop Latency Stats</h3>
+                <p class="text-gray-400 text-sm">Min, max, average, and standard deviation for each hop. Identify bottlenecks at a glance.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🔴</div>
+                <h3 class="text-white font-semibold mb-1">Packet Loss Detection</h3>
+                <p class="text-gray-400 text-sm">Track packet loss percentage per hop and overall. Visual indicators highlight problem areas.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🕐</div>
+                <h3 class="text-white font-semibold mb-1">Traceroute History</h3>
+                <p class="text-gray-400 text-sm">Save and review past traceroutes. Compare network paths over time to spot changes.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🔗</div>
+                <h3 class="text-white font-semibold mb-1">Path Visualization</h3>
+                <p class="text-gray-400 text-sm">Network path rendered as a clear node diagram with color-coded latency indicators.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🌙</div>
+                <h3 class="text-white font-semibold mb-1">Catppuccin Theme</h3>
+                <p class="text-gray-400 text-sm">Beautiful dark Mocha theme. Easy on the eyes during network troubleshooting.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🔒</div>
+                <h3 class="text-white font-semibold mb-1">No Permissions Abuse</h3>
+                <p class="text-gray-400 text-sm">Only requests the network permissions it needs. No contacts, no storage, no tracking.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">⚡</div>
+                <h3 class="text-white font-semibold mb-1">Fast & Lightweight</h3>
+                <p class="text-gray-400 text-sm">Minimal resource usage. Runs smoothly even on older devices.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Download -->
+    <div id="download" class="mb-12">
+        <h2 class="text-2xl font-bold text-white mb-6">Download</h2>
+        <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+            <div class="flex flex-col sm:flex-row items-center gap-6">
+                <div class="flex-1">
+                    <p class="text-gray-300 mb-2"><strong>Version:</strong> 1.0.0</p>
+                    <p class="text-gray-300 mb-2"><strong>Requires:</strong> Android 8.0+ (API 26)</p>
+                    <p class="text-gray-300 mb-4"><strong>Price:</strong> Free (ad-supported)</p>
+                    <p class="text-gray-500 text-sm">APK download coming soon.</p>
+                </div>
+                <div class="text-center">
+                    <span class="inline-block bg-gray-600 text-gray-400 px-8 py-3 rounded-lg font-medium cursor-not-allowed">
+                        Coming Soon
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Legal Links -->
+    <div class="text-center text-gray-500 text-sm">
+        <a href="/pingmap/privacy" class="hover:text-gray-300 transition">Privacy Policy</a>
+        <span class="mx-2">|</span>
+        <a href="/pingmap/terms" class="hover:text-gray-300 transition">Terms of Service</a>
+        <span class="mx-2">|</span>
+        <span>support@byteoven.com</span>
+    </div>
+
+</div>
+{% endblock %}

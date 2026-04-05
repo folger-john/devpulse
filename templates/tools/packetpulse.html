@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block title %}PacketPulse - Real-Time Network Traffic Monitor for Android | DevPulse{% endblock %}
+{% block description %}Free Android network traffic monitor with live connection tracking, protocol breakdown, traffic statistics, connection logging, and custom Canvas visualizations.{% endblock %}
+{% block og_title %}PacketPulse - Network Traffic Monitor for Android{% endblock %}
+{% block og_description %}Free real-time network traffic monitor for Android. Live connections, protocol breakdown, traffic stats, and visualizations.{% endblock %}
+
+{% block jsonld %}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"MobileApplication","name":"PacketPulse","operatingSystem":"Android","applicationCategory":"UtilitiesApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free real-time network traffic monitor for Android with live connection tracking, protocol breakdown, traffic statistics, and custom Canvas visualizations.","author":{"@type":"Organization","name":"DevPulse","url":"https://devpulse.tools"}}
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto px-4 py-8">
+
+    <!-- Hero -->
+    <div class="bg-gray-800 rounded-2xl p-8 mb-8 border border-gray-700">
+        <div class="flex flex-col md:flex-row items-center gap-8">
+            <img src="/static/img/apps/packetpulse_icon_512.png" alt="PacketPulse" class="w-24 h-24 rounded-2xl border border-gray-600">
+            <div class="flex-1 text-center md:text-left">
+                <h1 class="text-3xl font-bold text-white mb-2">PacketPulse</h1>
+                <p class="text-xl text-gray-300 mb-4">Real-Time Network Traffic Monitor for Android</p>
+                <p class="text-gray-400 mb-6">See what your device is doing on the network in real time. Monitor active connections, track protocol usage, view traffic stats, and visualize network activity - all without root access.</p>
+                <div class="flex flex-wrap gap-3 justify-center md:justify-start">
+                    <a href="#download" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition">
+                        Download APK
+                    </a>
+                    <a href="#features" class="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-medium transition">
+                        Features
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features -->
+    <div id="features" class="mb-12">
+        <h2 class="text-2xl font-bold text-white mb-6">Features</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">📡</div>
+                <h3 class="text-white font-semibold mb-1">Live Connection Monitor</h3>
+                <p class="text-gray-400 text-sm">Watch active network connections in real time. See remote IPs, ports, and connection states as they change.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🔀</div>
+                <h3 class="text-white font-semibold mb-1">Protocol Breakdown</h3>
+                <p class="text-gray-400 text-sm">TCP vs UDP traffic breakdown. See which protocols your apps are using and how much bandwidth each consumes.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">📊</div>
+                <h3 class="text-white font-semibold mb-1">Traffic Statistics</h3>
+                <p class="text-gray-400 text-sm">Detailed traffic stats with bytes sent/received, connection counts, and bandwidth usage over time.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">📋</div>
+                <h3 class="text-white font-semibold mb-1">Connection Logging</h3>
+                <p class="text-gray-400 text-sm">Log all network connections for later review. Filter and search through connection history.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">📱</div>
+                <h3 class="text-white font-semibold mb-1">Device Network Info</h3>
+                <p class="text-gray-400 text-sm">View WiFi details, IP addresses, gateway, DNS servers, and other network configuration at a glance.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🎨</div>
+                <h3 class="text-white font-semibold mb-1">Canvas Visualizations</h3>
+                <p class="text-gray-400 text-sm">Custom-drawn network activity visualizations using Android Canvas. See traffic patterns as they happen.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🌙</div>
+                <h3 class="text-white font-semibold mb-1">Catppuccin Theme</h3>
+                <p class="text-gray-400 text-sm">Beautiful dark Mocha theme. Designed for comfortable monitoring sessions.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🔒</div>
+                <h3 class="text-white font-semibold mb-1">No Root Required</h3>
+                <p class="text-gray-400 text-sm">Works without root access. Uses standard Android APIs to read network state and connections.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">⚡</div>
+                <h3 class="text-white font-semibold mb-1">Low Overhead</h3>
+                <p class="text-gray-400 text-sm">Efficient polling and rendering. Minimal battery and CPU impact even during extended monitoring.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Download -->
+    <div id="download" class="mb-12">
+        <h2 class="text-2xl font-bold text-white mb-6">Download</h2>
+        <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+            <div class="flex flex-col sm:flex-row items-center gap-6">
+                <div class="flex-1">
+                    <p class="text-gray-300 mb-2"><strong>Version:</strong> 1.0.0</p>
+                    <p class="text-gray-300 mb-2"><strong>Requires:</strong> Android 8.0+ (API 26)</p>
+                    <p class="text-gray-300 mb-4"><strong>Price:</strong> Free (ad-supported)</p>
+                    <p class="text-gray-500 text-sm">APK download coming soon.</p>
+                </div>
+                <div class="text-center">
+                    <span class="inline-block bg-gray-600 text-gray-400 px-8 py-3 rounded-lg font-medium cursor-not-allowed">
+                        Coming Soon
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Legal Links -->
+    <div class="text-center text-gray-500 text-sm">
+        <a href="/packetpulse/privacy" class="hover:text-gray-300 transition">Privacy Policy</a>
+        <span class="mx-2">|</span>
+        <a href="/packetpulse/terms" class="hover:text-gray-300 transition">Terms of Service</a>
+        <span class="mx-2">|</span>
+        <span>support@byteoven.com</span>
+    </div>
+
+</div>
+{% endblock %}

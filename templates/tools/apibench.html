@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block title %}APIBench - Mobile REST API Client for Android | DevPulse{% endblock %}
+{% block description %}Free Android REST API client with support for GET, POST, PUT, PATCH, DELETE methods, JSON syntax highlighting, collections, and request history. Download from Google Play.{% endblock %}
+{% block og_title %}APIBench - REST API Client for Android{% endblock %}
+{% block og_description %}Free REST API testing client for Android. Full HTTP method support, JSON highlighting, collections, and request history.{% endblock %}
+
+{% block jsonld %}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"MobileApplication","name":"APIBench","operatingSystem":"Android","applicationCategory":"DeveloperApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free REST API client for Android with full HTTP method support, JSON syntax highlighting, collections, and request history.","author":{"@type":"Organization","name":"DevPulse","url":"https://devpulse.tools"}}
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto px-4 py-8">
+
+    <!-- Hero -->
+    <div class="bg-gray-800 rounded-2xl p-8 mb-8 border border-gray-700">
+        <div class="flex flex-col md:flex-row items-center gap-8">
+            <img src="/static/img/apps/apibench_icon_512.png" alt="APIBench" class="w-24 h-24 rounded-2xl border border-gray-600">
+            <div class="flex-1 text-center md:text-left">
+                <h1 class="text-3xl font-bold text-white mb-2">APIBench</h1>
+                <p class="text-xl text-gray-300 mb-4">Mobile REST API Client for Android</p>
+                <p class="text-gray-400 mb-6">A fast, lightweight API testing tool built for mobile developers. Send requests, inspect responses, organize collections - all from your phone. No account required, no cloud sync, your data stays on your device.</p>
+                <div class="flex flex-wrap gap-3 justify-center md:justify-start">
+                    <a href="#download" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition">
+                        Download APK
+                    </a>
+                    <a href="#features" class="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-medium transition">
+                        Features
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features -->
+    <div id="features" class="mb-12">
+        <h2 class="text-2xl font-bold text-white mb-6">Features</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🌐</div>
+                <h3 class="text-white font-semibold mb-1">All REST Methods</h3>
+                <p class="text-gray-400 text-sm">Full support for GET, POST, PUT, PATCH, and DELETE requests. Test any endpoint from your device.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">📋</div>
+                <h3 class="text-white font-semibold mb-1">Headers Editor</h3>
+                <p class="text-gray-400 text-sm">Add, edit, and manage custom request headers. Authorization, Content-Type, and any custom header you need.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">📝</div>
+                <h3 class="text-white font-semibold mb-1">Body Editor</h3>
+                <p class="text-gray-400 text-sm">Compose request bodies in JSON or form-data format. Switch between content types with a tap.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🎨</div>
+                <h3 class="text-white font-semibold mb-1">JSON Highlighting</h3>
+                <p class="text-gray-400 text-sm">Syntax-highlighted JSON responses for easy reading. Collapsible sections for large payloads.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">📁</div>
+                <h3 class="text-white font-semibold mb-1">Collections</h3>
+                <p class="text-gray-400 text-sm">Save and organize requests into collections. Group by project, API, or however you work.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🕐</div>
+                <h3 class="text-white font-semibold mb-1">Request History</h3>
+                <p class="text-gray-400 text-sm">Full history of past requests. Re-send any previous request with one tap.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">📊</div>
+                <h3 class="text-white font-semibold mb-1">Response Viewer</h3>
+                <p class="text-gray-400 text-sm">View status code, response time, body size, and full response headers at a glance.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🌙</div>
+                <h3 class="text-white font-semibold mb-1">Catppuccin Theme</h3>
+                <p class="text-gray-400 text-sm">Beautiful dark Mocha theme. Easy on the eyes during late-night debugging sessions.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🔒</div>
+                <h3 class="text-white font-semibold mb-1">Local Storage Only</h3>
+                <p class="text-gray-400 text-sm">No cloud sync, no account required. Your API keys and requests stay on your device.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Download -->
+    <div id="download" class="mb-12">
+        <h2 class="text-2xl font-bold text-white mb-6">Download</h2>
+        <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+            <div class="flex flex-col sm:flex-row items-center gap-6">
+                <div class="flex-1">
+                    <p class="text-gray-300 mb-2"><strong>Version:</strong> 1.0.0</p>
+                    <p class="text-gray-300 mb-2"><strong>Requires:</strong> Android 8.0+ (API 26)</p>
+                    <p class="text-gray-300 mb-4"><strong>Price:</strong> Free (ad-supported)</p>
+                    <p class="text-gray-500 text-sm">APK download coming soon.</p>
+                </div>
+                <div class="text-center">
+                    <span class="inline-block bg-gray-600 text-gray-400 px-8 py-3 rounded-lg font-medium cursor-not-allowed">
+                        Coming Soon
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Legal Links -->
+    <div class="text-center text-gray-500 text-sm">
+        <a href="/apibench/privacy" class="hover:text-gray-300 transition">Privacy Policy</a>
+        <span class="mx-2">|</span>
+        <a href="/apibench/terms" class="hover:text-gray-300 transition">Terms of Service</a>
+        <span class="mx-2">|</span>
+        <span>support@byteoven.com</span>
+    </div>
+
+</div>
+{% endblock %}
