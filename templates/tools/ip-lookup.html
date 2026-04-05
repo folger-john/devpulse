@@ -1,9 +1,10 @@
 {% extends "tool_base.html" %}
+{% block how_to_use %}<p class="text-gray-600 text-sm">Your public IP address is detected automatically. Click "Copy IP" to copy it to your clipboard.</p>{% endblock %}
 {% block tool_content %}
 <div class="space-y-4">
     <div class="text-center py-8">
         <div class="text-sm text-gray-500 mb-2">Your Public IP Address</div>
-        <div id="ipDisplay" class="text-4xl font-bold text-brand-600 mono mb-4">Loading...</div>
+        <div id="ipDisplay" class="text-4xl font-bold text-brand-600 mono mb-4"><span class="animate-pulse text-gray-400">Detecting...</span></div>
         <button onclick="copyToClipboard(document.getElementById('ipDisplay').textContent, this)" class="px-6 py-2 bg-brand-600 text-white rounded-lg hover:bg-brand-700 font-medium">Copy IP</button>
     </div>
     <div class="bg-gray-50 p-4 rounded-lg">

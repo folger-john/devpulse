@@ -31,6 +31,7 @@ RATE_LIMIT = 120  # requests per minute per IP
 RATE_WINDOW = 60  # seconds
 
 _rate_store: dict[str, list[float]] = defaultdict(list)
+_RATE_STORE_MAX_IPS = 50_000  # Prevent unbounded memory growth
 
 @app.middleware("http")
 async def security_middleware(request: Request, call_next):
@@ -40,6 +41,16 @@ async def security_middleware(request: Request, call_next):
         now = time.time()
         # Clean old entries
         _rate_store[ip] = [t for t in _rate_store[ip] if now - t < RATE_WINDOW]
+        # Remove empty IP entries to prevent memory leak
+        if not _rate_store[ip]:
+            del _rate_store[ip]
+        # Emergency prune if too many unique IPs tracked
+        if len(_rate_store) > _RATE_STORE_MAX_IPS:
+            cutoff = now - RATE_WINDOW
+            stale = [k for k, v in _rate_store.items() if not v or v[-1] < cutoff]
+            for k in stale:
+                del _rate_store[k]
+        _rate_store[ip].append(now)
         if len(_rate_store[ip]) >= RATE_LIMIT:
             return JSONResponse(
                 {"error": "Rate limit exceeded. Max 120 requests/minute. See /api for paid tiers."},
@@ -173,8 +184,15 @@ TOOLS = [
     {"slug": "yaml-formatter", "name": "YAML Formatter & Validator", "icon": "Y!", "desc": "Format, validate, and beautify YAML data online.", "category": "Data"},
     {"slug": "json-to-typescript", "name": "JSON to TypeScript", "icon": "TS", "desc": "Generate TypeScript interfaces from JSON data.", "category": "Data"},
     {"slug": "image-to-base64", "name": "Image to Base64", "icon": "IMG", "desc": "Convert images to Base64 encoded strings.", "category": "Encoding"},
-    {"slug": "shellpad", "name": "ShellPad", "icon": "</>", "desc": "Free SSH & Telnet client for Android. Tabbed sessions, xterm.js terminal, TOFU host verification.", "category": "Apps"},
-    {"slug": "netprobe", "name": "NetProbe", "icon": "((•))", "desc": "Free IP & port scanner for Android. Network discovery, ping, whois, scan history.", "category": "Apps"},
+    {"slug": "shellpad", "name": "ShellPad", "icon": "</>", "desc": "Free SSH & Telnet client for Android. Tabbed sessions, xterm.js terminal, TOFU host verification.", "category": "Apps", "tags": ["SSH & Telnet", "xterm.js Terminal", "Tabbed Sessions"]},
+    {"slug": "netprobe", "name": "NetProbe", "icon": "((•))", "desc": "Free IP & port scanner for Android. Network discovery, ping, whois, scan history.", "category": "Apps", "tags": ["Port Scanner", "Network Discovery", "Ping & Whois"]},
+    {"slug": "dnslens", "name": "DNSLens", "icon": "DNS", "desc": "Free DNS lookup & propagation checker for Android. Query all record types across multiple resolvers.", "category": "Apps", "tags": ["DNS Lookup", "Propagation Check", "Record Browser"]},
+    {"slug": "statusping", "name": "StatusPing", "icon": "UP?", "desc": "Free uptime monitor for Android. Background checks, push alerts, response time graphs.", "category": "Apps", "tags": ["Uptime Monitor", "Push Alerts", "Response Graphs"]},
+    {"slug": "crontab", "name": "CronTab", "icon": "0 *", "desc": "Free cron expression builder & explainer for Android. Visual builder, next-run preview, cheat sheet.", "category": "Apps", "tags": ["Cron Builder", "Expression Explainer", "Cheat Sheet"]},
+    {"slug": "apibench", "name": "APIBench", "icon": "{}", "desc": "Mobile REST API client for Android. Build, test, and debug APIs with collections and history.", "category": "Apps", "tags": ["REST Client", "API Testing", "JSON Viewer"]},
+    {"slug": "pingmap", "name": "PingMap", "icon": "~>", "desc": "Visual traceroute & latency mapper for Android. Trace network paths with real-time ping graphs.", "category": "Apps", "tags": ["Traceroute", "Ping", "Latency Graph"]},
+    {"slug": "gitpulse", "name": "GitPulse", "icon": "<>", "desc": "GitHub dashboard for Android. Monitor repos, PRs, issues, and notifications on the go.", "category": "Apps", "tags": ["GitHub", "Dashboard", "Notifications"]},
+    {"slug": "packetpulse", "name": "PacketPulse", "icon": "##", "desc": "Real-time network traffic monitor for Android. See active connections, traffic stats, and network info.", "category": "Apps", "tags": ["Network Monitor", "Traffic Stats", "Connections"]},
 ]
 
 CATEGORIES = sorted(set(t["category"] for t in TOOLS))
@@ -222,6 +240,76 @@ async def netprobe_privacy(request: Request):
 async def netprobe_terms(request: Request):
     return templates.TemplateResponse(request, "netprobe/terms.html")
 
+# ─── DNSLens App Pages ──────────────────────────────────────────────────────
+
+@app.get("/dnslens/privacy", response_class=HTMLResponse)
+async def dnslens_privacy(request: Request):
+    return templates.TemplateResponse(request, "dnslens/privacy.html")
+
+@app.get("/dnslens/terms", response_class=HTMLResponse)
+async def dnslens_terms(request: Request):
+    return templates.TemplateResponse(request, "dnslens/terms.html")
+
+# ─── StatusPing App Pages ───────────────────────────────────────────────────
+
+@app.get("/statusping/privacy", response_class=HTMLResponse)
+async def statusping_privacy(request: Request):
+    return templates.TemplateResponse(request, "statusping/privacy.html")
+
+@app.get("/statusping/terms", response_class=HTMLResponse)
+async def statusping_terms(request: Request):
+    return templates.TemplateResponse(request, "statusping/terms.html")
+
+# ─── CronTab App Pages ─────────────────────────────────────────────────────
+
+@app.get("/crontab/privacy", response_class=HTMLResponse)
+async def crontab_privacy(request: Request):
+    return templates.TemplateResponse(request, "crontab/privacy.html")
+
+@app.get("/crontab/terms", response_class=HTMLResponse)
+async def crontab_terms(request: Request):
+    return templates.TemplateResponse(request, "crontab/terms.html")
+
+# ─── APIBench App Pages ────────────────────────────────────────────────────
+
+@app.get("/apibench/privacy", response_class=HTMLResponse)
+async def apibench_privacy(request: Request):
+    return templates.TemplateResponse(request, "apibench/privacy.html")
+
+@app.get("/apibench/terms", response_class=HTMLResponse)
+async def apibench_terms(request: Request):
+    return templates.TemplateResponse(request, "apibench/terms.html")
+
+# ─── PingMap App Pages ─────────────────────────────────────────────────────
+
+@app.get("/pingmap/privacy", response_class=HTMLResponse)
+async def pingmap_privacy(request: Request):
+    return templates.TemplateResponse(request, "pingmap/privacy.html")
+
+@app.get("/pingmap/terms", response_class=HTMLResponse)
+async def pingmap_terms(request: Request):
+    return templates.TemplateResponse(request, "pingmap/terms.html")
+
+# ─── GitPulse App Pages ───────────────────────────────────────────────────
+
+@app.get("/gitpulse/privacy", response_class=HTMLResponse)
+async def gitpulse_privacy(request: Request):
+    return templates.TemplateResponse(request, "gitpulse/privacy.html")
+
+@app.get("/gitpulse/terms", response_class=HTMLResponse)
+async def gitpulse_terms(request: Request):
+    return templates.TemplateResponse(request, "gitpulse/terms.html")
+
+# ─── PacketPulse App Pages ─────────────────────────────────────────────────
+
+@app.get("/packetpulse/privacy", response_class=HTMLResponse)
+async def packetpulse_privacy(request: Request):
+    return templates.TemplateResponse(request, "packetpulse/privacy.html")
+
+@app.get("/packetpulse/terms", response_class=HTMLResponse)
+async def packetpulse_terms(request: Request):
+    return templates.TemplateResponse(request, "packetpulse/terms.html")
+
 @app.get("/api", response_class=HTMLResponse)
 async def api_docs(request: Request):
     return templates.TemplateResponse(request, "api_docs.html", {"tools": TOOLS})
@@ -244,8 +332,8 @@ async def health():
 
 # ─── Square Checkout ─────────────────────────────────────────────────────────
 import os
-SQUARE_APP_ID = os.environ.get("SQUARE_APP_ID", "sq0idp-M7pR0h8Xs-wNGRcMxIfI3Q")
-SQUARE_LOCATION_ID = os.environ.get("SQUARE_LOCATION_ID", "LP7AKQWB67YGV")
+SQUARE_APP_ID = os.environ.get("SQUARE_APP_ID", "")
+SQUARE_LOCATION_ID = os.environ.get("SQUARE_LOCATION_ID", "")
 SQUARE_TOKEN = os.environ.get("SQUARE_ACCESS_TOKEN", "")
 
 @app.get("/checkout", response_class=HTMLResponse)
@@ -942,6 +1030,10 @@ async def sitemap(request: Request):
 @app.get("/robots.txt")
 async def robots(request: Request):
     return HTMLResponse(content="User-agent: *\nAllow: /\nSitemap: https://devpulse.tools/sitemap.xml", media_type="text/plain")
+
+@app.get("/ads.txt")
+async def ads_txt():
+    return HTMLResponse(content="google.com, pub-6835477942706863, DIRECT, f08c47fec0942fa0\n", media_type="text/plain")
 
 if __name__ == "__main__":
     import uvicorn

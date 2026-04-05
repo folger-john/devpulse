@@ -6,7 +6,7 @@
     <p class="text-gray-600 mb-8">All DevPulse tools are available as REST API endpoints. Free to use, no API key required.</p>
 
     <div class="bg-brand-50 border border-brand-200 rounded-lg p-4 mb-8">
-        <p class="text-sm text-brand-800"><strong>Base URL:</strong> <code class="bg-white px-2 py-1 rounded">https://your-domain/api/</code></p>
+        <p class="text-sm text-brand-800"><strong>Base URL:</strong> <code class="bg-white px-2 py-1 rounded">https://devpulse.tools/api/</code></p>
         <p class="text-sm text-brand-700 mt-1">All endpoints accept JSON POST requests (unless noted) and return JSON responses.</p>
     </div>
 
@@ -85,6 +85,104 @@
             <h3 class="font-semibold text-lg mb-2">Cron Parser</h3>
             <code class="text-sm bg-gray-100 px-2 py-1 rounded">POST /api/cron-parse</code>
             <div class="mt-3"><pre class="bg-gray-900 text-green-400 p-4 rounded-lg text-sm">{"expression": "*/5 * * * *"}</pre></div>
+        </div>
+
+        <!-- URL Encode -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6">
+            <h3 class="font-semibold text-lg mb-2">URL Encode/Decode</h3>
+            <code class="text-sm bg-gray-100 px-2 py-1 rounded">POST /api/url-encode</code>
+            <div class="mt-3"><pre class="bg-gray-900 text-green-400 p-4 rounded-lg text-sm">{"text": "hello world &amp; foo=bar", "mode": "encode"}</pre></div>
+        </div>
+
+        <!-- HTML Encode -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6">
+            <h3 class="font-semibold text-lg mb-2">HTML Entity Encode/Decode</h3>
+            <code class="text-sm bg-gray-100 px-2 py-1 rounded">POST /api/html-encode</code>
+            <div class="mt-3"><pre class="bg-gray-900 text-green-400 p-4 rounded-lg text-sm">{"text": "&lt;p&gt;Hello&lt;/p&gt;", "mode": "encode"}</pre></div>
+        </div>
+
+        <!-- Color Convert -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6">
+            <h3 class="font-semibold text-lg mb-2">Color Converter</h3>
+            <code class="text-sm bg-gray-100 px-2 py-1 rounded">POST /api/color-convert</code>
+            <div class="mt-3"><pre class="bg-gray-900 text-green-400 p-4 rounded-lg text-sm">{"text": "#6366f1"}</pre></div>
+        </div>
+
+        <!-- CSS Minify -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6">
+            <h3 class="font-semibold text-lg mb-2">CSS Minifier</h3>
+            <code class="text-sm bg-gray-100 px-2 py-1 rounded">POST /api/css-minify</code>
+            <div class="mt-3"><pre class="bg-gray-900 text-green-400 p-4 rounded-lg text-sm">{"text": "body { color: red; }"}</pre></div>
+        </div>
+
+        <!-- Lorem Ipsum -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6">
+            <h3 class="font-semibold text-lg mb-2">Lorem Ipsum Generator</h3>
+            <code class="text-sm bg-gray-100 px-2 py-1 rounded">POST /api/lorem-ipsum</code>
+            <div class="mt-3"><pre class="bg-gray-900 text-green-400 p-4 rounded-lg text-sm">{"paragraphs": 3, "sentences_per": 5}</pre></div>
+        </div>
+
+        <!-- SQL Formatter -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6">
+            <h3 class="font-semibold text-lg mb-2">SQL Formatter</h3>
+            <code class="text-sm bg-gray-100 px-2 py-1 rounded">POST /api/sql-format</code>
+            <div class="mt-3"><pre class="bg-gray-900 text-green-400 p-4 rounded-lg text-sm">{"text": "SELECT * FROM users WHERE id=1"}</pre></div>
+        </div>
+
+        <!-- JSON to YAML -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6">
+            <h3 class="font-semibold text-lg mb-2">JSON to YAML Converter</h3>
+            <code class="text-sm bg-gray-100 px-2 py-1 rounded">POST /api/json-to-yaml</code>
+            <div class="mt-3"><pre class="bg-gray-900 text-green-400 p-4 rounded-lg text-sm">{"text": "{\"key\": \"value\"}", "mode": "json_to_yaml"}</pre></div>
+        </div>
+
+        <!-- Slug Generator -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6">
+            <h3 class="font-semibold text-lg mb-2">URL Slug Generator</h3>
+            <code class="text-sm bg-gray-100 px-2 py-1 rounded">POST /api/slug-generate</code>
+            <div class="mt-3"><pre class="bg-gray-900 text-green-400 p-4 rounded-lg text-sm">{"text": "My Blog Post Title!"}</pre></div>
+        </div>
+
+        <!-- Text Case -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6">
+            <h3 class="font-semibold text-lg mb-2">Text Case Converter</h3>
+            <code class="text-sm bg-gray-100 px-2 py-1 rounded">POST /api/text-case</code>
+            <div class="mt-3"><pre class="bg-gray-900 text-green-400 p-4 rounded-lg text-sm">{"text": "hello world", "mode": "title"}</pre></div>
+        </div>
+
+        <!-- YAML Formatter -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6">
+            <h3 class="font-semibold text-lg mb-2">YAML Formatter</h3>
+            <code class="text-sm bg-gray-100 px-2 py-1 rounded">POST /api/yaml-format</code>
+            <div class="mt-3"><pre class="bg-gray-900 text-green-400 p-4 rounded-lg text-sm">{"text": "name: test\nversion: 1"}</pre></div>
+        </div>
+
+        <!-- JSON to TypeScript -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6">
+            <h3 class="font-semibold text-lg mb-2">JSON to TypeScript</h3>
+            <code class="text-sm bg-gray-100 px-2 py-1 rounded">POST /api/json-to-typescript</code>
+            <div class="mt-3"><pre class="bg-gray-900 text-green-400 p-4 rounded-lg text-sm">{"text": "{\"id\": 1, \"name\": \"test\"}", "rootName": "User"}</pre></div>
+        </div>
+
+        <!-- Image to Base64 -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6">
+            <h3 class="font-semibold text-lg mb-2">Image to Base64</h3>
+            <code class="text-sm bg-gray-100 px-2 py-1 rounded">POST /api/image-to-base64</code>
+            <p class="text-sm text-gray-500 mt-2">Send as multipart form with a <code>file</code> field containing the image.</p>
+        </div>
+
+        <!-- IP Lookup -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6">
+            <h3 class="font-semibold text-lg mb-2">IP Address Lookup</h3>
+            <code class="text-sm bg-gray-100 px-2 py-1 rounded">GET /api/ip-lookup</code>
+            <p class="text-sm text-gray-500 mt-2">Returns your public IP address. No parameters needed.</p>
+        </div>
+
+        <!-- QR Code -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6">
+            <h3 class="font-semibold text-lg mb-2">QR Code Generator</h3>
+            <code class="text-sm bg-gray-100 px-2 py-1 rounded">GET /api/qr-code?text=...&amp;size=300</code>
+            <p class="text-sm text-gray-500 mt-2">Returns a PNG image. Parameters: <code>text</code> (required), <code>size</code> (optional, default 300).</p>
         </div>
     </div>
 

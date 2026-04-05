@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Terms of Service - PacketPulse | DevPulse{% endblock %}
+{% block description %}Terms of service for PacketPulse network traffic monitor for Android.{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto px-4 py-8">
+    <nav class="text-sm text-gray-500 mb-6">
+        <a href="/" class="hover:text-gray-300">DevPulse</a> /
+        <a href="/tool/packetpulse" class="hover:text-gray-300">PacketPulse</a> /
+        <span class="text-gray-400">Terms of Service</span>
+    </nav>
+
+    <h1 class="text-3xl font-bold text-white mb-2">Terms of Service</h1>
+    <p class="text-gray-500 mb-8">Last updated: April 4, 2026</p>
+
+    <div class="prose prose-invert max-w-none space-y-6">
+        <h2 class="text-xl font-semibold text-white">1. Acceptance of Terms</h2>
+        <p class="text-gray-300">By downloading, installing, or using PacketPulse ("the App"), you agree to be bound by these Terms of Service. If you do not agree, do not use the App.</p>
+
+        <h2 class="text-xl font-semibold text-white">2. Description of Service</h2>
+        <p class="text-gray-300">PacketPulse is a real-time network traffic monitoring tool for Android. It displays active connections, traffic statistics, and network information by reading connection metadata from the Android system.</p>
+
+        <h2 class="text-xl font-semibold text-white">3. User Responsibilities</h2>
+        <ul class="text-gray-300 space-y-2 list-disc pl-5">
+            <li>You are solely responsible for how you use the network information provided by the App.</li>
+            <li>You agree not to use the App for any illegal or unauthorized purpose.</li>
+            <li>The App monitors your own device's network connections only. Do not attempt to use it to monitor other devices or networks without authorization.</li>
+            <li>You are responsible for complying with applicable laws regarding network monitoring in your jurisdiction.</li>
+        </ul>
+
+        <h2 class="text-xl font-semibold text-white">4. No Warranty</h2>
+        <p class="text-gray-300">The App is provided "AS IS" without warranty of any kind, express or implied. We do not guarantee that the App will be uninterrupted, error-free, or secure. Network data displayed may not be complete or fully accurate. Use of the App is at your own risk.</p>
+
+        <h2 class="text-xl font-semibold text-white">5. Limitation of Liability</h2>
+        <p class="text-gray-300">In no event shall the developers of PacketPulse be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of data, loss of profits, or damage to systems resulting from your use of the App.</p>
+
+        <h2 class="text-xl font-semibold text-white">6. Network Monitoring</h2>
+        <p class="text-gray-300">PacketPulse reads network connection metadata from the Android system. It does not perform deep packet inspection, intercept traffic, or modify network data. The accuracy of displayed information depends on the Android system's reporting capabilities.</p>
+
+        <h2 class="text-xl font-semibold text-white">7. Third-Party Services</h2>
+        <p class="text-gray-300">The App uses Google AdMob for advertising. Google's advertising services are subject to <a href="https://policies.google.com/terms" class="text-blue-400 hover:underline">Google's Terms of Service</a> and <a href="https://policies.google.com/privacy" class="text-blue-400 hover:underline">Privacy Policy</a>.</p>
+
+        <h2 class="text-xl font-semibold text-white">8. Modifications</h2>
+        <p class="text-gray-300">We reserve the right to modify these terms at any time. Continued use of the App after changes constitutes acceptance of the new terms.</p>
+
+        <h2 class="text-xl font-semibold text-white">9. Contact</h2>
+        <p class="text-gray-300">For questions about these terms, contact us at <a href="mailto:support@byteoven.com" class="text-blue-400 hover:underline">support@byteoven.com</a></p>
+    </div>
+</div>
+{% endblock %}

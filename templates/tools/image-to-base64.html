@@ -1,4 +1,5 @@
 {% extends "tool_base.html" %}
+{% block how_to_use %}<p class="text-gray-600 text-sm">Drag and drop an image file onto the upload area, or click "browse" to select one. The tool converts it to a Base64-encoded data URI you can embed directly in HTML or CSS.</p>{% endblock %}
 {% block tool_content %}
 <div class="space-y-4">
     <div class="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl p-8 text-center hover:border-brand-400 transition-colors" id="dropZone">
@@ -29,7 +30,7 @@
             </div>
             <textarea id="rawB64" rows="4" readonly class="w-full p-3 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg text-xs break-all"></textarea>
         </div>
-        <div class="text-center"><img id="preview" class="max-h-48 mx-auto rounded-lg border"></div>
+        <div class="text-center"><img id="preview" class="max-h-48 mx-auto rounded-lg border" style="display:none"></div>
     </div>
 </div>
 {% endblock %}
@@ -51,7 +52,7 @@ async function handleFile(file){
         document.getElementById('ratio').textContent=(r.encoded_size/r.size*100).toFixed(0)+'%';
         document.getElementById('dataUri').value=r.data_uri;
         document.getElementById('rawB64').value=r.base64;
-        document.getElementById('preview').src=r.data_uri;
+        var p=document.getElementById('preview');p.src=r.data_uri;p.style.display='';
     }
 }
 function formatBytes(b){if(b<1024)return b+'B';if(b<1048576)return(b/1024).toFixed(1)+'KB';return(b/1048576).toFixed(1)+'MB';}

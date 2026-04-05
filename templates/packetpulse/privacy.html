@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Privacy Policy - PacketPulse | DevPulse{% endblock %}
+{% block description %}Privacy policy for PacketPulse network traffic monitor for Android.{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto px-4 py-8">
+    <nav class="text-sm text-gray-500 mb-6">
+        <a href="/" class="hover:text-gray-300">DevPulse</a> /
+        <a href="/tool/packetpulse" class="hover:text-gray-300">PacketPulse</a> /
+        <span class="text-gray-400">Privacy Policy</span>
+    </nav>
+
+    <h1 class="text-3xl font-bold text-white mb-2">Privacy Policy</h1>
+    <p class="text-gray-500 mb-8">Last updated: April 4, 2026</p>
+
+    <div class="bg-blue-900/30 border border-blue-700/50 rounded-lg p-4 mb-8">
+        <p class="text-blue-300"><strong>Summary:</strong> PacketPulse does not collect, transmit, or share your personal data. Your network traffic data and connection logs stay on your device. We use Google AdMob for ads, which has its own data collection practices.</p>
+    </div>
+
+    <div class="prose prose-invert max-w-none space-y-6">
+        <h2 class="text-xl font-semibold text-white">1. Data We Collect</h2>
+
+        <h3 class="text-lg font-medium text-green-400">Data stored locally on your device:</h3>
+        <ul class="text-gray-300 space-y-2 list-disc pl-5">
+            <li><strong>Connection logs:</strong> Active network connections, remote hosts, ports, and protocol information displayed in real-time. Stored in an on-device database.</li>
+            <li><strong>Traffic statistics:</strong> Bandwidth usage, data transfer rates, and historical traffic data.</li>
+            <li><strong>Network info:</strong> Local IP address, gateway, DNS servers, and Wi-Fi/cellular connection details.</li>
+        </ul>
+
+        <h3 class="text-lg font-medium text-green-400">Data we do NOT collect:</h3>
+        <ul class="text-gray-300 space-y-2 list-disc pl-5">
+            <li>We do not collect or transmit your network traffic data to any remote server.</li>
+            <li>We do not inspect packet contents or perform deep packet inspection.</li>
+            <li>We do not track your browsing activity or connection destinations.</li>
+            <li>We do not have analytics or telemetry.</li>
+        </ul>
+
+        <h2 class="text-xl font-semibold text-white">2. Third-Party Services</h2>
+        <h3 class="text-lg font-medium text-yellow-400">Google AdMob</h3>
+        <p class="text-gray-300">The App displays advertisements via Google AdMob. Google may collect device identifiers, IP addresses, and usage data for ad targeting and measurement. This is governed by <a href="https://policies.google.com/privacy" class="text-blue-400 hover:underline">Google's Privacy Policy</a>.</p>
+
+        <h2 class="text-xl font-semibold text-white">3. Data Security</h2>
+        <ul class="text-gray-300 space-y-2 list-disc pl-5">
+            <li>All network monitoring data is processed and stored locally on your device.</li>
+            <li>The app reads network connection metadata from the Android system; it does not intercept or modify network traffic.</li>
+            <li>No data is sent to any external server by the App itself.</li>
+        </ul>
+
+        <h2 class="text-xl font-semibold text-white">4. Data Retention</h2>
+        <p class="text-gray-300">All data is stored locally on your device. Uninstalling the App deletes all stored data including traffic history, connection logs, and network statistics.</p>
+
+        <h2 class="text-xl font-semibold text-white">5. Children's Privacy</h2>
+        <p class="text-gray-300">The App is not directed at children under 13. We do not knowingly collect information from children.</p>
+
+        <h2 class="text-xl font-semibold text-white">6. Your Rights</h2>
+        <p class="text-gray-300">Since all data is stored locally on your device, you have full control. You can clear traffic history or uninstall the App to remove all data.</p>
+
+        <h2 class="text-xl font-semibold text-white">7. Changes to This Policy</h2>
+        <p class="text-gray-300">We may update this Privacy Policy from time to time. The updated version will be accessible within the App and at this URL.</p>
+
+        <h2 class="text-xl font-semibold text-white">8. Contact</h2>
+        <p class="text-gray-300">For questions about this privacy policy, contact us at <a href="mailto:support@byteoven.com" class="text-blue-400 hover:underline">support@byteoven.com</a></p>
+    </div>
+</div>
+{% endblock %}

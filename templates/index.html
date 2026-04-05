@@ -6,7 +6,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
         <div class="text-center max-w-3xl mx-auto">
             <h1 class="text-4xl md:text-5xl font-bold mb-4">Paste Anything. <span class="text-brand-200">We'll Handle It.</span></h1>
-            <p class="text-lg text-brand-200 mb-8">25+ free developer tools. Paste JSON, JWT, Base64, timestamps, colors — auto-detected instantly.</p>
+            <p class="text-lg text-brand-200 mb-8">30+ free developer tools. Paste JSON, JWT, Base64, timestamps, colors — auto-detected instantly.</p>
             <div class="relative max-w-2xl mx-auto">
                 <textarea id="omnibar" rows="3" placeholder="Paste anything here — JSON, JWT, Base64, a timestamp, a color code, a URL, a regex... we'll figure it out."
                     class="w-full px-6 py-4 rounded-xl text-gray-900 bg-white shadow-lg focus:outline-none focus:ring-4 focus:ring-brand-300 text-base mono resize-none"
@@ -35,18 +35,56 @@
     <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6835477942706863" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
 
+<!-- Dev Apps Section -->
+<section class="bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between mb-8">
+            <div>
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Dev Apps</h2>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Free developer tools for mobile and desktop</p>
+            </div>
+            <span class="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-semibold rounded-full">FREE</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for tool in tools %}
+            {% if tool.category == 'Apps' %}
+            <a href="/tool/{{ tool.slug }}" class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:border-brand-400 dark:hover:border-brand-500 hover:shadow-lg transition-all block group">
+                <div class="flex items-center gap-4 mb-4">
+                    <img src="/static/img/apps/{{ tool.slug }}_icon_512.png" alt="{{ tool.name }}" class="w-14 h-14 rounded-xl border border-gray-600">
+                    <div>
+                        <h3 class="font-bold text-lg text-gray-900 dark:text-gray-100 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition">{{ tool.name }}</h3>
+                        <div class="flex items-center gap-2 mt-1">
+                            <span class="px-2 py-0.5 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-xs rounded">Android</span>
+                            <span class="text-gray-400 text-xs">Free + Ads</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">{{ tool.desc }}</p>
+                <div class="flex items-center gap-3 text-xs text-gray-400">
+                    {% for tag in tool.tags %}{% if not loop.first %}<span>&bull;</span>{% endif %}<span>{{ tag }}</span>{% endfor %}
+                </div>
+            </a>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
 <!-- Tools Grid -->
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <!-- Category Filter -->
     <div class="flex flex-wrap gap-2 mb-8" id="categoryFilter">
         <button onclick="filterCategory('all')" class="cat-btn px-4 py-2 rounded-full text-sm font-medium bg-brand-600 text-white" data-cat="all">All Tools</button>
         {% for cat in categories %}
+        {% if cat != 'Apps' %}
         <button onclick="filterCategory('{{ cat }}')" class="cat-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-600 hover:bg-gray-200" data-cat="{{ cat }}">{{ cat }}</button>
+        {% endif %}
         {% endfor %}
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" id="toolsGrid">
         {% for tool in tools %}
+        {% if tool.category != 'Apps' %}
         <a href="/tool/{{ tool.slug }}" class="tool-card bg-white dark:bg-gray-800 rounded-xl p-5 border border-gray-200 dark:border-gray-700 hover:border-brand-300 block" data-name="{{ tool.name|lower }}" data-cat="{{ tool.category }}">
             <div class="flex items-center space-x-3 mb-3">
                 <div class="w-10 h-10 bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 rounded-lg flex items-center justify-center font-bold text-sm mono">{{ tool.icon }}</div>
@@ -57,6 +95,7 @@
                 <span class="inline-block px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 rounded text-xs">{{ tool.category }}</span>
             </div>
         </a>
+        {% endif %}
         {% endfor %}
     </div>
 </section>
@@ -74,7 +113,7 @@
             <div class="text-center">
                 <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-xl flex items-center justify-center mx-auto mb-4 text-2xl">&#128274;</div>
                 <h3 class="font-semibold mb-2 text-gray-900 dark:text-gray-100">Privacy First</h3>
-                <p class="text-sm text-gray-500 dark:text-gray-400">No data is stored. No cookies. No tracking. Your data stays yours.</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">Your tool data is never stored or sent to our servers. All processing is instant and stateless.</p>
             </div>
             <div class="text-center">
                 <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-xl flex items-center justify-center mx-auto mb-4 text-2xl">&#128640;</div>

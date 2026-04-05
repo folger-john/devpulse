@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Privacy Policy - GitPulse | DevPulse{% endblock %}
+{% block description %}Privacy policy for GitPulse GitHub dashboard for Android.{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto px-4 py-8">
+    <nav class="text-sm text-gray-500 mb-6">
+        <a href="/" class="hover:text-gray-300">DevPulse</a> /
+        <a href="/tool/gitpulse" class="hover:text-gray-300">GitPulse</a> /
+        <span class="text-gray-400">Privacy Policy</span>
+    </nav>
+
+    <h1 class="text-3xl font-bold text-white mb-2">Privacy Policy</h1>
+    <p class="text-gray-500 mb-8">Last updated: April 4, 2026</p>
+
+    <div class="bg-blue-900/30 border border-blue-700/50 rounded-lg p-4 mb-8">
+        <p class="text-blue-300"><strong>Summary:</strong> GitPulse does not collect, transmit, or share your personal data. Your GitHub access token and dashboard preferences stay on your device. We use Google AdMob for ads, which has its own data collection practices.</p>
+    </div>
+
+    <div class="prose prose-invert max-w-none space-y-6">
+        <h2 class="text-xl font-semibold text-white">1. Data We Collect</h2>
+
+        <h3 class="text-lg font-medium text-green-400">Data stored locally on your device:</h3>
+        <ul class="text-gray-300 space-y-2 list-disc pl-5">
+            <li><strong>GitHub access token:</strong> Your personal access token or OAuth token is stored securely on your device to authenticate with the GitHub API.</li>
+            <li><strong>Dashboard preferences:</strong> Your selected repositories, notification filters, and display settings.</li>
+            <li><strong>Cached data:</strong> Repository info, PR lists, and issue data cached locally for offline viewing and faster loading.</li>
+        </ul>
+
+        <h3 class="text-lg font-medium text-green-400">Data we do NOT collect:</h3>
+        <ul class="text-gray-300 space-y-2 list-disc pl-5">
+            <li>We do not collect or transmit your GitHub token to any server other than GitHub's API.</li>
+            <li>We do not access your private repositories beyond what your token permits.</li>
+            <li>We do not track your usage, repositories, or activity.</li>
+            <li>We do not have analytics or telemetry.</li>
+        </ul>
+
+        <h2 class="text-xl font-semibold text-white">2. Third-Party Services</h2>
+        <h3 class="text-lg font-medium text-yellow-400">GitHub API</h3>
+        <p class="text-gray-300">The App communicates directly with the GitHub API using your personal access token. Your use of the GitHub API is governed by <a href="https://docs.github.com/en/site-policy/github-terms/github-terms-of-service" class="text-blue-400 hover:underline">GitHub's Terms of Service</a> and <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" class="text-blue-400 hover:underline">Privacy Statement</a>.</p>
+
+        <h3 class="text-lg font-medium text-yellow-400">Google AdMob</h3>
+        <p class="text-gray-300">The App displays advertisements via Google AdMob. Google may collect device identifiers, IP addresses, and usage data for ad targeting and measurement. This is governed by <a href="https://policies.google.com/privacy" class="text-blue-400 hover:underline">Google's Privacy Policy</a>.</p>
+
+        <h2 class="text-xl font-semibold text-white">3. Data Security</h2>
+        <ul class="text-gray-300 space-y-2 list-disc pl-5">
+            <li>Your GitHub access token is stored securely using Android Keystore encryption.</li>
+            <li>All communication with the GitHub API uses HTTPS encryption.</li>
+            <li>The app communicates directly with GitHub and does not proxy your data through any intermediary server.</li>
+        </ul>
+
+        <h2 class="text-xl font-semibold text-white">4. Data Retention</h2>
+        <p class="text-gray-300">All data is stored locally on your device. Uninstalling the App deletes all stored data including your GitHub token, cached repositories, and preferences.</p>
+
+        <h2 class="text-xl font-semibold text-white">5. Children's Privacy</h2>
+        <p class="text-gray-300">The App is not directed at children under 13. We do not knowingly collect information from children.</p>
+
+        <h2 class="text-xl font-semibold text-white">6. Your Rights</h2>
+        <p class="text-gray-300">Since all data is stored locally on your device, you have full control. You can revoke your GitHub token, clear cached data, or uninstall the App to remove all data.</p>
+
+        <h2 class="text-xl font-semibold text-white">7. Changes to This Policy</h2>
+        <p class="text-gray-300">We may update this Privacy Policy from time to time. The updated version will be accessible within the App and at this URL.</p>
+
+        <h2 class="text-xl font-semibold text-white">8. Contact</h2>
+        <p class="text-gray-300">For questions about this privacy policy, contact us at <a href="mailto:support@byteoven.com" class="text-blue-400 hover:underline">support@byteoven.com</a></p>
+    </div>
+</div>
+{% endblock %}

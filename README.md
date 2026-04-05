@@ -4,7 +4,7 @@
 
 ### Fast, Free Developer Tools — Right in Your Browser
 
-**25 essential utilities for developers. No sign-up. No tracking. No nonsense.**
+**30+ essential utilities for developers. No sign-up. No tracking. No nonsense.**
 
 [Live Site](https://devpulse.tools) · [API Docs](https://devpulse.tools/api) · [Report Bug](https://github.com/folger-john/devpulse/issues)
 
@@ -87,13 +87,13 @@ curl -X POST https://devpulse.tools/api/uuid \
 ```bash
 curl -X POST https://devpulse.tools/api/base64 \
   -H "Content-Type: application/json" \
-  -d '{"text": "Hello, DevPulse!", "action": "encode"}'
+  -d '{"text": "Hello, DevPulse!", "mode": "encode"}'
 ```
 
 ### Generate QR Code
 
 ```bash
-curl "https://devpulse.tools/api/qr-code?data=https://devpulse.tools" --output qr.png
+curl "https://devpulse.tools/api/qr-code?text=https://devpulse.tools" --output qr.png
 ```
 
 See the full [API documentation](https://devpulse.tools/api) for all endpoints and parameters.

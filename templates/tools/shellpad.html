@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+
+{% block title %}ShellPad - Free SSH & Telnet Client for Android | DevPulse{% endblock %}
+{% block description %}Free Android SSH and Telnet client with tabbed sessions, xterm.js terminal emulator, host key verification, and encrypted credential storage. Download from Google Play.{% endblock %}
+{% block og_title %}ShellPad - SSH & Telnet for Android{% endblock %}
+{% block og_description %}Free, secure SSH & Telnet client for Android. Tabbed sessions, full terminal emulator, no tracking.{% endblock %}
+
+{% block jsonld %}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"MobileApplication","name":"ShellPad","operatingSystem":"Android","applicationCategory":"DeveloperApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free SSH & Telnet client for Android with tabbed sessions, xterm.js terminal, and encrypted credential storage.","author":{"@type":"Organization","name":"DevPulse","url":"https://devpulse.tools"}}
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto px-4 py-8">
+
+    <!-- Hero -->
+    <div class="bg-gray-800 rounded-2xl p-8 mb-8 border border-gray-700">
+        <div class="flex flex-col md:flex-row items-center gap-8">
+            <img src="/static/img/apps/shellpad_icon_512.png" alt="ShellPad" class="w-24 h-24 rounded-2xl border border-gray-600">
+            <div class="flex-1 text-center md:text-left">
+                <h1 class="text-3xl font-bold text-white mb-2">ShellPad</h1>
+                <p class="text-xl text-gray-300 mb-4">Free SSH & Telnet Client for Android</p>
+                <p class="text-gray-400 mb-6">A clean, secure terminal client that does what the others don't - proper terminal emulation, tabbed sessions, and no password storage by default. Built by developers, for developers.</p>
+                <div class="flex flex-wrap gap-3 justify-center md:justify-start">
+                    <a href="#download" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition">
+                        Download APK
+                    </a>
+                    <a href="#features" class="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-medium transition">
+                        Features
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features -->
+    <div id="features" class="mb-12">
+        <h2 class="text-2xl font-bold text-white mb-6">Features</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🔒</div>
+                <h3 class="text-white font-semibold mb-1">SSH & Telnet</h3>
+                <p class="text-gray-400 text-sm">Full SSH2 with password, keyboard-interactive, and private key auth. Telnet for legacy systems.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">📑</div>
+                <h3 class="text-white font-semibold mb-1">Tabbed Sessions</h3>
+                <p class="text-gray-400 text-sm">Multiple concurrent connections with swipeable tabs. Switch between servers instantly.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🖥️</div>
+                <h3 class="text-white font-semibold mb-1">Real Terminal</h3>
+                <p class="text-gray-400 text-sm">Full xterm.js emulator. Runs vim, htop, tmux, Claude CLI - not just basic text output.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🔑</div>
+                <h3 class="text-white font-semibold mb-1">No Stored Passwords</h3>
+                <p class="text-gray-400 text-sm">Default "Plain" mode - server prompts for password in terminal. Your credentials never touch the app.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🛡️</div>
+                <h3 class="text-white font-semibold mb-1">Host Key Verification</h3>
+                <p class="text-gray-400 text-sm">Trust On First Use (TOFU) SSH fingerprint verification. Warns on key changes (MITM detection).</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">⌨️</div>
+                <h3 class="text-white font-semibold mb-1">Special Keys Bar</h3>
+                <p class="text-gray-400 text-sm">ESC, TAB, CTRL, arrows, copy/paste, and common shell characters (~ $ _ | / -) always accessible.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🔐</div>
+                <h3 class="text-white font-semibold mb-1">Encrypted Storage</h3>
+                <p class="text-gray-400 text-sm">Optional saved passwords encrypted with AES-256-GCM. Key stored in Android Keystore.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🌙</div>
+                <h3 class="text-white font-semibold mb-1">Catppuccin Theme</h3>
+                <p class="text-gray-400 text-sm">Beautiful dark Mocha theme with 256-color and truecolor support. Easy on the eyes.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">📡</div>
+                <h3 class="text-white font-semibold mb-1">Background Sessions</h3>
+                <p class="text-gray-400 text-sm">Sessions stay alive when you switch apps. Foreground service + wake lock keep connections active.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Options -->
+    <div class="mb-12">
+        <h2 class="text-2xl font-bold text-white mb-6">Authentication Options</h2>
+        <div class="bg-gray-800 rounded-lg border border-gray-700 overflow-hidden">
+            <table class="w-full text-left">
+                <thead class="bg-gray-900">
+                    <tr>
+                        <th class="px-6 py-3 text-gray-300 text-sm">Method</th>
+                        <th class="px-6 py-3 text-gray-300 text-sm">How It Works</th>
+                        <th class="px-6 py-3 text-gray-300 text-sm">Password Stored?</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-700">
+                    <tr>
+                        <td class="px-6 py-3 text-white font-medium">Plain (default)</td>
+                        <td class="px-6 py-3 text-gray-400">Server prompts in terminal. You type password there.</td>
+                        <td class="px-6 py-3 text-green-400">No</td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-3 text-white font-medium">Saved Password</td>
+                        <td class="px-6 py-3 text-gray-400">Password encrypted and stored on device.</td>
+                        <td class="px-6 py-3 text-yellow-400">Yes (AES-256)</td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-3 text-white font-medium">Private Key</td>
+                        <td class="px-6 py-3 text-gray-400">PEM key file for key-based auth.</td>
+                        <td class="px-6 py-3 text-green-400">No</td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-3 text-white font-medium">Key + Passphrase</td>
+                        <td class="px-6 py-3 text-gray-400">Private key with encrypted passphrase.</td>
+                        <td class="px-6 py-3 text-yellow-400">Passphrase only</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Download -->
+    <div id="download" class="mb-12">
+        <h2 class="text-2xl font-bold text-white mb-6">Download</h2>
+        <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+            <div class="flex flex-col sm:flex-row items-center gap-6">
+                <div class="flex-1">
+                    <p class="text-gray-300 mb-2"><strong>Version:</strong> 2.5.1</p>
+                    <p class="text-gray-300 mb-2"><strong>Size:</strong> ~11 MB</p>
+                    <p class="text-gray-300 mb-2"><strong>Requires:</strong> Android 8.0+ (API 26)</p>
+                    <p class="text-gray-300 mb-4"><strong>Price:</strong> Free (ad-supported)</p>
+                    <p class="text-gray-500 text-sm">Google Play listing coming soon.</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-gray-500 text-xs mt-2 mb-2">Direct APK download:</p>
+                    <a href="/static/downloads/shellpad-latest.apk" class="inline-block bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-medium transition">
+                        Download APK
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Security -->
+    <div class="mb-12">
+        <h2 class="text-2xl font-bold text-white mb-6">Security</h2>
+        <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+            <ul class="space-y-3 text-gray-300">
+                <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#10003;</span> SSH host key verification (TOFU) with MITM change detection</li>
+                <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#10003;</span> AES-256-GCM encryption for saved credentials (Android Keystore backed)</li>
+                <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#10003;</span> Android backup disabled - credentials can't be extracted via adb</li>
+                <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#10003;</span> No analytics, no telemetry, no tracking</li>
+                <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#10003;</span> Host/port input validation (prevents injection)</li>
+                <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#10003;</span> URI handler requires user confirmation before connecting</li>
+                <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#10003;</span> ProGuard/R8 obfuscation in release builds</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Legal Links -->
+    <div class="text-center text-gray-500 text-sm">
+        <a href="/shellpad/privacy" class="hover:text-gray-300 transition">Privacy Policy</a>
+        <span class="mx-2">|</span>
+        <a href="/shellpad/terms" class="hover:text-gray-300 transition">Terms of Service</a>
+        <span class="mx-2">|</span>
+        <span>support@byteoven.com</span>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+
+{% block title %}DNSLens - Free DNS Lookup & Propagation Checker for Android | DevPulse{% endblock %}
+{% block description %}Free Android DNS lookup tool. Query A, AAAA, MX, CNAME, TXT, NS, SOA records across multiple resolvers. Check DNS propagation instantly.{% endblock %}
+{% block og_title %}DNSLens - DNS Lookup & Propagation Checker for Android{% endblock %}
+{% block og_description %}Free DNS lookup tool for Android. Query all record types, check propagation across Google, Cloudflare, Quad9, and OpenDNS.{% endblock %}
+
+{% block jsonld %}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"MobileApplication","name":"DNSLens","operatingSystem":"Android","applicationCategory":"UtilitiesApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free DNS lookup & propagation checker for Android. Query all record types across multiple public resolvers.","author":{"@type":"Organization","name":"DevPulse","url":"https://devpulse.tools"}}
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto px-4 py-8">
+
+    <!-- Hero -->
+    <div class="bg-gray-800 rounded-2xl p-8 mb-8 border border-gray-700">
+        <div class="flex flex-col md:flex-row items-center gap-8">
+            <img src="/static/img/apps/dnslens_icon_512.png" alt="DNSLens" class="w-24 h-24 rounded-2xl border border-gray-600">
+            <div class="flex-1 text-center md:text-left">
+                <h1 class="text-3xl font-bold text-white mb-2">DNSLens</h1>
+                <p class="text-xl text-gray-300 mb-4">Free DNS Lookup & Propagation Checker for Android</p>
+                <p class="text-gray-400 mb-6">Query any DNS record type across multiple public resolvers — all from your phone. Check propagation, browse record details, and save lookup history. No account required, no data collected.</p>
+                <div class="flex flex-wrap gap-3 justify-center md:justify-start">
+                    <a href="#download" class="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-lg font-medium transition">
+                        Download APK
+                    </a>
+                    <a href="#features" class="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-medium transition">
+                        Features
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features -->
+    <div id="features" class="mb-12">
+        <h2 class="text-2xl font-bold text-white mb-6">Features</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🔍</div>
+                <h3 class="text-white font-semibold mb-1">All Record Types</h3>
+                <p class="text-gray-400 text-sm">Query A, AAAA, MX, CNAME, TXT, NS, SOA, SRV, and PTR records. Color-coded type badges for easy scanning.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🌐</div>
+                <h3 class="text-white font-semibold mb-1">Propagation Check</h3>
+                <p class="text-gray-400 text-sm">Compare DNS results across Google (8.8.8.8), Cloudflare (1.1.1.1), Quad9 (9.9.9.9), and OpenDNS (208.67.222.222).</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🏷️</div>
+                <h3 class="text-white font-semibold mb-1">Record Filtering</h3>
+                <p class="text-gray-400 text-sm">Filter results by record type with chips. Each type gets a unique Catppuccin accent color for visual clarity.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">📜</div>
+                <h3 class="text-white font-semibold mb-1">Lookup History</h3>
+                <p class="text-gray-400 text-sm">All lookups saved locally with timestamps, record types found, and result counts. Clear anytime.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">⚡</div>
+                <h3 class="text-white font-semibold mb-1">Fast Queries</h3>
+                <p class="text-gray-400 text-sm">Powered by dnsjava for reliable, fast lookups. Results return in milliseconds with response time tracking.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">✅</div>
+                <h3 class="text-white font-semibold mb-1">Match Detection</h3>
+                <p class="text-gray-400 text-sm">Propagation checker shows MATCH/DIFFER/ERROR status for each resolver so you know if DNS has fully propagated.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🌙</div>
+                <h3 class="text-white font-semibold mb-1">Dark Theme</h3>
+                <p class="text-gray-400 text-sm">Beautiful Catppuccin Mocha dark theme. Easy on the eyes for late-night DNS debugging.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🔒</div>
+                <h3 class="text-white font-semibold mb-1">Privacy First</h3>
+                <p class="text-gray-400 text-sm">Domain validation prevents injection. No data leaves your device except DNS queries to public resolvers.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">📱</div>
+                <h3 class="text-white font-semibold mb-1">Lightweight</h3>
+                <p class="text-gray-400 text-sm">Small APK, low memory usage, no background processes. Just a fast DNS tool when you need it.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Supported Record Types -->
+    <div class="mb-12">
+        <h2 class="text-2xl font-bold text-white mb-6">Supported Record Types</h2>
+        <div class="bg-gray-800 rounded-lg border border-gray-700 overflow-hidden">
+            <table class="w-full text-left">
+                <thead class="bg-gray-900">
+                    <tr>
+                        <th class="px-6 py-3 text-gray-300 text-sm">Type</th>
+                        <th class="px-6 py-3 text-gray-300 text-sm">Description</th>
+                        <th class="px-6 py-3 text-gray-300 text-sm">Example</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-700">
+                    <tr><td class="px-6 py-3 text-blue-400 font-medium">A</td><td class="px-6 py-3 text-gray-400">IPv4 address</td><td class="px-6 py-3 text-gray-400">93.184.216.34</td></tr>
+                    <tr><td class="px-6 py-3 text-teal-400 font-medium">AAAA</td><td class="px-6 py-3 text-gray-400">IPv6 address</td><td class="px-6 py-3 text-gray-400">2606:2800:220:1:...</td></tr>
+                    <tr><td class="px-6 py-3 text-green-400 font-medium">MX</td><td class="px-6 py-3 text-gray-400">Mail exchange server</td><td class="px-6 py-3 text-gray-400">10 mail.example.com</td></tr>
+                    <tr><td class="px-6 py-3 text-yellow-400 font-medium">CNAME</td><td class="px-6 py-3 text-gray-400">Canonical name alias</td><td class="px-6 py-3 text-gray-400">www → example.com</td></tr>
+                    <tr><td class="px-6 py-3 text-purple-400 font-medium">TXT</td><td class="px-6 py-3 text-gray-400">Text records (SPF, DKIM, etc.)</td><td class="px-6 py-3 text-gray-400">v=spf1 include:...</td></tr>
+                    <tr><td class="px-6 py-3 text-orange-400 font-medium">NS</td><td class="px-6 py-3 text-gray-400">Nameservers</td><td class="px-6 py-3 text-gray-400">ns1.example.com</td></tr>
+                    <tr><td class="px-6 py-3 text-pink-400 font-medium">SOA</td><td class="px-6 py-3 text-gray-400">Start of authority</td><td class="px-6 py-3 text-gray-400">ns1.example.com admin...</td></tr>
+                    <tr><td class="px-6 py-3 text-indigo-400 font-medium">SRV</td><td class="px-6 py-3 text-gray-400">Service locator</td><td class="px-6 py-3 text-gray-400">0 5 5060 sip.example.com</td></tr>
+                    <tr><td class="px-6 py-3 text-red-400 font-medium">PTR</td><td class="px-6 py-3 text-gray-400">Reverse DNS pointer</td><td class="px-6 py-3 text-gray-400">host.example.com</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Download -->
+    <div id="download" class="mb-12">
+        <h2 class="text-2xl font-bold text-white mb-6">Download</h2>
+        <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+            <div class="flex flex-col sm:flex-row items-center gap-6">
+                <div class="flex-1">
+                    <p class="text-gray-300 mb-2"><strong>Version:</strong> 1.0.0</p>
+                    <p class="text-gray-300 mb-2"><strong>Size:</strong> ~8 MB</p>
+                    <p class="text-gray-300 mb-2"><strong>Requires:</strong> Android 8.0+ (API 26)</p>
+                    <p class="text-gray-300 mb-4"><strong>Price:</strong> Free (ad-supported)</p>
+                    <p class="text-gray-500 text-sm">Google Play listing coming soon.</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-gray-500 text-xs mt-2 mb-2">Direct APK download:</p>
+                    <a href="/static/downloads/dnslens-latest.apk" class="inline-block bg-teal-600 hover:bg-teal-700 text-white px-8 py-3 rounded-lg font-medium transition">
+                        Download APK
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Security -->
+    <div class="mb-12">
+        <h2 class="text-2xl font-bold text-white mb-6">Security & Privacy</h2>
+        <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+            <ul class="space-y-3 text-gray-300">
+                <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#10003;</span> No account required — just type a domain and go</li>
+                <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#10003;</span> No data collected, no analytics, no tracking</li>
+                <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#10003;</span> All lookup history stored locally on your device only</li>
+                <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#10003;</span> Domain input validation prevents injection attacks</li>
+                <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#10003;</span> DNS queries go only to trusted public resolvers (Google, Cloudflare, Quad9, OpenDNS)</li>
+                <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#10003;</span> ProGuard/R8 obfuscation in release builds</li>
+                <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#10003;</span> Android backup disabled — lookup data can't be extracted via adb</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Legal Links -->
+    <div class="text-center text-gray-500 text-sm">
+        <a href="/dnslens/privacy" class="hover:text-gray-300 transition">Privacy Policy</a>
+        <span class="mx-2">|</span>
+        <a href="/dnslens/terms" class="hover:text-gray-300 transition">Terms of Service</a>
+        <span class="mx-2">|</span>
+        <span>support@byteoven.com</span>
+    </div>
+
+</div>
+{% endblock %}

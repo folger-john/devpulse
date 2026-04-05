@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Terms of Service - APIBench | DevPulse{% endblock %}
+{% block description %}Terms of service for APIBench REST API client for Android.{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto px-4 py-8">
+    <nav class="text-sm text-gray-500 mb-6">
+        <a href="/" class="hover:text-gray-300">DevPulse</a> /
+        <a href="/tool/apibench" class="hover:text-gray-300">APIBench</a> /
+        <span class="text-gray-400">Terms of Service</span>
+    </nav>
+
+    <h1 class="text-3xl font-bold text-white mb-2">Terms of Service</h1>
+    <p class="text-gray-500 mb-8">Last updated: April 4, 2026</p>
+
+    <div class="prose prose-invert max-w-none space-y-6">
+        <h2 class="text-xl font-semibold text-white">1. Acceptance of Terms</h2>
+        <p class="text-gray-300">By downloading, installing, or using APIBench ("the App"), you agree to be bound by these Terms of Service. If you do not agree, do not use the App.</p>
+
+        <h2 class="text-xl font-semibold text-white">2. Description of Service</h2>
+        <p class="text-gray-300">APIBench is a mobile REST API client that allows you to build, test, and debug API requests from your Android device. The App sends HTTP requests directly from your device to the servers you specify.</p>
+
+        <h2 class="text-xl font-semibold text-white">3. User Responsibilities</h2>
+        <ul class="text-gray-300 space-y-2 list-disc pl-5">
+            <li>You are solely responsible for the API endpoints you connect to and the requests you send.</li>
+            <li>You must have proper authorization to access any API or service you interact with via the App.</li>
+            <li>You agree not to use the App for any illegal or unauthorized purpose, including unauthorized API access or abuse.</li>
+            <li>You are responsible for maintaining the security of your API keys and authentication tokens.</li>
+        </ul>
+
+        <h2 class="text-xl font-semibold text-white">4. No Warranty</h2>
+        <p class="text-gray-300">The App is provided "AS IS" without warranty of any kind, express or implied. We do not guarantee that the App will be uninterrupted, error-free, or secure. Use of the App is at your own risk.</p>
+
+        <h2 class="text-xl font-semibold text-white">5. Limitation of Liability</h2>
+        <p class="text-gray-300">In no event shall the developers of APIBench be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of data, loss of profits, or damage to systems resulting from your use of the App.</p>
+
+        <h2 class="text-xl font-semibold text-white">6. API Traffic</h2>
+        <p class="text-gray-300">All API requests are sent directly from your device to the target server. The App does not proxy, log, or inspect your traffic on any remote server. You are responsible for understanding the security implications of sending requests over HTTP vs HTTPS.</p>
+
+        <h2 class="text-xl font-semibold text-white">7. Third-Party Services</h2>
+        <p class="text-gray-300">The App uses Google AdMob for advertising. Google's advertising services are subject to <a href="https://policies.google.com/terms" class="text-blue-400 hover:underline">Google's Terms of Service</a> and <a href="https://policies.google.com/privacy" class="text-blue-400 hover:underline">Privacy Policy</a>.</p>
+
+        <h2 class="text-xl font-semibold text-white">8. Modifications</h2>
+        <p class="text-gray-300">We reserve the right to modify these terms at any time. Continued use of the App after changes constitutes acceptance of the new terms.</p>
+
+        <h2 class="text-xl font-semibold text-white">9. Contact</h2>
+        <p class="text-gray-300">For questions about these terms, contact us at <a href="mailto:support@byteoven.com" class="text-blue-400 hover:underline">support@byteoven.com</a></p>
+    </div>
+</div>
+{% endblock %}

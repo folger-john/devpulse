@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block title %}StatusPing - Free Uptime Monitor for Android | DevPulse{% endblock %}
+{% block description %}Free Android uptime monitor with background checks, push notifications on downtime, response time graphs, and check history.{% endblock %}
+{% block og_title %}StatusPing - Uptime Monitor for Android{% endblock %}
+{% block og_description %}Monitor your websites and APIs from your phone. Background checks, push alerts on downtime, response time graphs.{% endblock %}
+
+{% block jsonld %}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"MobileApplication","name":"StatusPing","operatingSystem":"Android","applicationCategory":"UtilitiesApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free uptime monitor for Android with background checks, push notifications, and response time graphs.","author":{"@type":"Organization","name":"DevPulse","url":"https://devpulse.tools"}}
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto px-4 py-8">
+
+    <!-- Hero -->
+    <div class="bg-gray-800 rounded-2xl p-8 mb-8 border border-gray-700">
+        <div class="flex flex-col md:flex-row items-center gap-8">
+            <img src="/static/img/apps/statusping_icon_512.png" alt="StatusPing" class="w-24 h-24 rounded-2xl border border-gray-600">
+            <div class="flex-1 text-center md:text-left">
+                <h1 class="text-3xl font-bold text-white mb-2">StatusPing</h1>
+                <p class="text-xl text-gray-300 mb-4">Free Uptime Monitor for Android</p>
+                <p class="text-gray-400 mb-6">Monitor your websites, APIs, and services from your phone. Get push notifications when something goes down, track response times with graphs, and keep a full check history. No account, no cloud — everything runs on your device.</p>
+                <div class="flex flex-wrap gap-3 justify-center md:justify-start">
+                    <a href="#download" class="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-lg font-medium transition">
+                        Download APK
+                    </a>
+                    <a href="#features" class="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-medium transition">
+                        Features
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features -->
+    <div id="features" class="mb-12">
+        <h2 class="text-2xl font-bold text-white mb-6">Features</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">📊</div>
+                <h3 class="text-white font-semibold mb-1">Monitor Dashboard</h3>
+                <p class="text-gray-400 text-sm">See all your endpoints at a glance — green for up, red for down, yellow for checking. Response time and uptime percentage on every card.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🔔</div>
+                <h3 class="text-white font-semibold mb-1">Push Notifications</h3>
+                <p class="text-gray-400 text-sm">Get notified instantly when an endpoint goes down or comes back up. Never miss an outage again.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">📈</div>
+                <h3 class="text-white font-semibold mb-1">Response Time Graphs</h3>
+                <p class="text-gray-400 text-sm">Custom-drawn line graphs show response time trends. Green lines for success, red dots for failures.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">⏰</div>
+                <h3 class="text-white font-semibold mb-1">Flexible Intervals</h3>
+                <p class="text-gray-400 text-sm">Check every 1, 5, 15, 30, or 60 minutes. Each monitor has its own independent schedule.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🌐</div>
+                <h3 class="text-white font-semibold mb-1">HTTP & HEAD Checks</h3>
+                <p class="text-gray-400 text-sm">Support for GET and HEAD methods. Configure expected status codes (200, 301, etc.) per monitor.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">📜</div>
+                <h3 class="text-white font-semibold mb-1">Check History</h3>
+                <p class="text-gray-400 text-sm">Full history of every check — status code, response time, errors. See exactly when and why things went wrong.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🔄</div>
+                <h3 class="text-white font-semibold mb-1">Background Workers</h3>
+                <p class="text-gray-400 text-sm">WorkManager-powered background checks that survive app restarts and device reboots.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🌙</div>
+                <h3 class="text-white font-semibold mb-1">Dark Theme</h3>
+                <p class="text-gray-400 text-sm">Beautiful Catppuccin Mocha dark theme. Easy on the eyes for checking your monitors at any hour.</p>
+            </div>
+            <div class="bg-gray-800 rounded-lg p-5 border border-gray-700">
+                <div class="text-2xl mb-2">🔒</div>
+                <h3 class="text-white font-semibold mb-1">Privacy First</h3>
+                <p class="text-gray-400 text-sm">No cloud, no account, no telemetry. All monitor data stays on your device. Your endpoints are your business.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Download -->
+    <div id="download" class="mb-12">
+        <h2 class="text-2xl font-bold text-white mb-6">Download</h2>
+        <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+            <div class="flex flex-col sm:flex-row items-center gap-6">
+                <div class="flex-1">
+                    <p class="text-gray-300 mb-2"><strong>Version:</strong> 1.0.0</p>
+                    <p class="text-gray-300 mb-2"><strong>Size:</strong> ~8 MB</p>
+                    <p class="text-gray-300 mb-2"><strong>Requires:</strong> Android 8.0+ (API 26)</p>
+                    <p class="text-gray-300 mb-4"><strong>Price:</strong> Free (ad-supported)</p>
+                    <p class="text-gray-500 text-sm">Google Play listing coming soon.</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-gray-500 text-xs mt-2 mb-2">Direct APK download:</p>
+                    <a href="/static/downloads/statusping-latest.apk" class="inline-block bg-teal-600 hover:bg-teal-700 text-white px-8 py-3 rounded-lg font-medium transition">
+                        Download APK
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Security -->
+    <div class="mb-12">
+        <h2 class="text-2xl font-bold text-white mb-6">Security & Privacy</h2>
+        <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+            <ul class="space-y-3 text-gray-300">
+                <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#10003;</span> No account required — add monitors and start checking immediately</li>
+                <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#10003;</span> No data collected, no analytics, no telemetry</li>
+                <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#10003;</span> All monitor data and check history stored locally only</li>
+                <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#10003;</span> URL validation before saving monitors</li>
+                <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#10003;</span> Network requests go only to endpoints you explicitly configure</li>
+                <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#10003;</span> ProGuard/R8 obfuscation in release builds</li>
+                <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#10003;</span> Android backup disabled — monitor data can't be extracted via adb</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Legal Links -->
+    <div class="text-center text-gray-500 text-sm">
+        <a href="/statusping/privacy" class="hover:text-gray-300 transition">Privacy Policy</a>
+        <span class="mx-2">|</span>
+        <a href="/statusping/terms" class="hover:text-gray-300 transition">Terms of Service</a>
+        <span class="mx-2">|</span>
+        <span>support@byteoven.com</span>
+    </div>
+
+</div>
+{% endblock %}
